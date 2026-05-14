@@ -75,10 +75,17 @@ export function Nav() {
     >
       <div className="container flex items-center justify-between">
         <a href="#top" className="flex items-center gap-3 whitespace-nowrap">
-          <div
-            className="grid size-9 place-items-center rounded-full border border-brass text-brass"
-          >
-            <Icon name="mountain" size={18} />
+          <div className="grid size-10 place-items-center rounded-full border border-brass text-brass shrink-0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" className="size-[22px]">
+              <path d="M2 20h20" />
+              <path d="M12 3l8 17" />
+              <path d="M10 3l-8 17" />
+              <path d="M12 3l-5 17" />
+              <path d="M10.8 7H9" />
+              <path d="M10 11H7" />
+              <path d="M9.2 15H5" />
+              <path d="M13 20v-5a1.5 1.5 0 0 1 3 0v5" />
+            </svg>
           </div>
           <div className="leading-tight">
             <div className="display text-[22px] tracking-wide">Swiss Cottages</div>
