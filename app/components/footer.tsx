@@ -72,10 +72,6 @@ export function Footer() {
             <div className="absolute left-[18px] top-[18px] rounded-pill border border-glass-bd bg-glass-strong px-3 py-1.5 font-mono text-[11px] transition-colors group-hover:border-brass group-hover:text-brass">
               33.9603° N, 73.4538° E <Icon name="arrow" size={10} className="inline ml-1" />
             </div>
-            <div className="ph-label">
-              <span>// MAP_EMBED — Google Maps iframe slot</span>
-              <span className="ph-tag">Bhurban</span>
-            </div>
           </a>
         </div>
 
@@ -154,11 +150,6 @@ export function Footer() {
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] text-ink-dim">
           <div className="font-mono">© 2026 SWISS COTTAGES SIX · CRAFTED IN BHURBAN</div>
-          <div className="flex flex-wrap gap-4 font-mono">
-            <span>v 2.0 · Spec 04</span>
-            <span>Built on Next.js · Vercel</span>
-            <span>Last booked · 14 min ago</span>
-          </div>
         </div>
       </div>
     </footer>

@@ -46,10 +46,6 @@ function ShowcaseImg({
         />
       ) : null}
       {children}
-      <div className="ph-label relative z-10">
-        <span>// {label}</span>
-        <span className="ph-tag">{tag}</span>
-      </div>
     </div>
   );
 }
@@ -129,8 +125,26 @@ function RevealBody({
 
 export function Showcase() {
   return (
-    <section id="cottages" className="section">
+    <section id="cottages" className="section pt-16 md:pt-24">
       <div className="container">
+        
+        {/* The Story Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-24 md:mb-32 max-w-[800px]"
+        >
+          <span className="eyebrow text-brass">The Heritage</span>
+          <h2 className="display mt-4 text-[clamp(32px,4vw,48px)] leading-tight text-ink">
+            Authentic Swiss Architecture, <br className="hidden md:block" />
+            <span className="display-italic text-brass">perfected</span> in Bhurban.
+          </h2>
+          <p className="mt-6 text-[17px] leading-relaxed text-ink-mute">
+            Conceived with a vision to bring alpine serenity to the Murree hills, Swiss Cottages Six was meticulously architected using genuine Swiss design principles. Operational since 2020, every detail of this sanctuary has been crafted for uncompromised comfort, featuring premium luxury furnishings exclusively by Interwood. It stands today as an elite retreat where timeless European elegance meets the misty peaks of Bhurban.
+          </p>
+        </motion.div>
+
         <motion.header
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
