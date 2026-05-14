@@ -34,7 +34,7 @@ function ShowcaseImg({
             src={imgSrc} 
             alt={label} 
             className="absolute inset-0 h-full w-full object-cover block dark:hidden" 
-            style={{ filter: "invert(1) hue-rotate(-124deg) saturate(0.6) brightness(0.95)" }} 
+            style={{ filter: "invert(1) hue-rotate(-180deg) saturate(1.8) brightness(0.95)" }} 
           />
         </>
       ) : accent ? (
