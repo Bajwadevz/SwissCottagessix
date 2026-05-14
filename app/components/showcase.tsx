@@ -207,43 +207,101 @@ export function Showcase() {
                 eyebrow: "5 KM",
                 title: "Murree Hills",
                 desc: "Traverse pristine pine-covered trails offering breathtaking alpine panoramas.",
-                imgSrc: "/attractions/murree_hills.png",
                 icon: "mountain" as const,
+                illustration: (
+                  <svg viewBox="0 0 400 320" className="absolute inset-0 h-full w-full bg-surface transition-transform duration-700 group-hover:scale-105">
+                    <path d="M50,320 L150,160 L250,260 L320,180 L450,320" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinejoin="round" />
+                    <path d="M120,320 L120,240 M105,300 L120,270 L135,300 M110,265 L120,245 L130,265" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M280,320 L280,220 M260,300 L280,260 L300,300 M270,250 L280,230 L290,250" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M180,100 Q210,70 240,100 Q270,90 290,120 Q240,140 180,100" fill="none" stroke="var(--line-2)" strokeWidth="1.5" strokeLinejoin="round" />
+                  </svg>
+                ),
               },
               {
                 eyebrow: "8 KM",
                 title: "Sozo Adventure Park",
                 desc: "A premium family destination featuring curated recreational experiences.",
-                imgSrc: "/attractions/sozo_park.png",
                 icon: "award" as const,
+                illustration: (
+                  <svg viewBox="0 0 400 320" className="absolute inset-0 h-full w-full bg-surface transition-transform duration-700 group-hover:scale-105">
+                    <circle cx="200" cy="160" r="70" fill="none" stroke="var(--brass)" strokeWidth="2" />
+                    <circle cx="200" cy="160" r="8" fill="none" stroke="var(--ink)" strokeWidth="2" />
+                    <line x1="200" y1="160" x2="200" y2="90" stroke="var(--ink)" strokeWidth="1" />
+                    <line x1="200" y1="160" x2="200" y2="230" stroke="var(--ink)" strokeWidth="1" />
+                    <line x1="200" y1="160" x2="130" y2="160" stroke="var(--ink)" strokeWidth="1" />
+                    <line x1="200" y1="160" x2="270" y2="160" stroke="var(--ink)" strokeWidth="1" />
+                    <line x1="200" y1="160" x2="150" y2="110" stroke="var(--ink)" strokeWidth="1" />
+                    <line x1="200" y1="160" x2="250" y2="210" stroke="var(--ink)" strokeWidth="1" />
+                    <path d="M200,160 L150,320 M200,160 L250,320" stroke="var(--ink)" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="80" y1="320" x2="320" y2="320" stroke="var(--brass)" strokeWidth="2" />
+                  </svg>
+                ),
               },
               {
                 eyebrow: "20 KM",
                 title: "Patriata Chair Lift",
                 desc: "Ascend the peaks via an iconic chairlift for unparalleled valley views.",
-                imgSrc: "/attractions/patriata.png",
                 icon: "star" as const,
+                illustration: (
+                  <svg viewBox="0 0 400 320" className="absolute inset-0 h-full w-full bg-surface transition-transform duration-700 group-hover:scale-105">
+                    <path d="M-20,100 Q200,180 420,60" fill="none" stroke="var(--line-2)" strokeWidth="2" />
+                    <g transform="translate(180, 125)">
+                      <line x1="20" y1="0" x2="20" y2="40" stroke="var(--ink)" strokeWidth="2" />
+                      <rect x="0" y="40" width="40" height="25" rx="4" fill="none" stroke="var(--brass)" strokeWidth="2" />
+                      <rect x="5" y="45" width="30" height="12" rx="2" fill="none" stroke="var(--ink)" strokeWidth="1.5" />
+                    </g>
+                    <path d="M60,320 L60,200 M45,280 L60,240 L75,280 M50,230 L60,210 L70,230" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M340,320 L340,180 M320,280 L340,220 L360,280 M330,210 L340,190 L350,210" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ),
               },
               {
                 eyebrow: "10 KM",
                 title: "Kashmir Point",
                 desc: "The quintessential Murree vantage point, perfect for golden-hour photography.",
-                imgSrc: "/attractions/kashmir_point.png",
                 icon: "pin" as const,
+                illustration: (
+                  <svg viewBox="0 0 400 320" className="absolute inset-0 h-full w-full bg-surface transition-transform duration-700 group-hover:scale-105">
+                    <path d="M0,240 Q150,230 250,250 T400,230" fill="none" stroke="var(--line-2)" strokeWidth="2" />
+                    <path d="M50,240 L120,160 L200,240 L300,130 L400,230" fill="none" stroke="var(--ink)" strokeOpacity="0.2" strokeWidth="1.5" strokeLinejoin="round" />
+                    <g transform="translate(200, 255)">
+                      <line x1="0" y1="65" x2="0" y2="10" stroke="var(--ink)" strokeWidth="2" />
+                      <line x1="0" y1="35" x2="-20" y2="65" stroke="var(--ink)" strokeWidth="2" />
+                      <line x1="0" y1="35" x2="20" y2="65" stroke="var(--ink)" strokeWidth="2" />
+                      <path d="M-20,15 L25,-5" stroke="var(--brass)" strokeWidth="8" strokeLinecap="round" />
+                    </g>
+                  </svg>
+                ),
               },
               {
                 eyebrow: "9 KM",
-                title: "Mall Road Murree",
+                title: "Mall Road",
                 desc: "The bustling epicenter of Murree, offering vibrant culinary and retail therapy.",
-                imgSrc: "/attractions/mall_road.png",
                 icon: "coffee" as const,
+                illustration: (
+                  <svg viewBox="0 0 400 320" className="absolute inset-0 h-full w-full bg-surface transition-transform duration-700 group-hover:scale-105">
+                    <g transform="translate(130, 320)">
+                      <line x1="0" y1="0" x2="0" y2="-180" stroke="var(--ink)" strokeWidth="2.5" />
+                      <line x1="0" y1="-180" x2="30" y2="-180" stroke="var(--ink)" strokeWidth="2" />
+                      <circle cx="30" cy="-170" r="8" fill="none" stroke="var(--brass)" strokeWidth="2" />
+                    </g>
+                    <path d="M180,320 Q240,240 280,180 T340,100" fill="none" stroke="var(--line-2)" strokeWidth="2" strokeDasharray="8, 8" />
+                    <rect x="250" y="140" width="100" height="180" fill="none" stroke="var(--ink)" strokeWidth="2" />
+                    <rect x="270" y="170" width="20" height="30" fill="none" stroke="var(--brass)" strokeWidth="1.5" />
+                    <rect x="310" y="170" width="20" height="30" fill="none" stroke="var(--brass)" strokeWidth="1.5" />
+                    <path d="M250,140 L300,100 L350,140 Z" fill="none" stroke="var(--ink)" strokeWidth="2" strokeLinejoin="round" />
+                    <rect x="280" y="260" width="40" height="60" fill="none" stroke="var(--ink)" strokeWidth="2" />
+                  </svg>
+                ),
               },
             ].map((e, i) => (
               <div
                 key={i}
-                className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface"
+                className="group flex flex-col overflow-hidden rounded-lg border border-line bg-surface"
               >
-                <ShowcaseImg imgSrc={e.imgSrc} label={e.title.toUpperCase()} tag={e.eyebrow} ratio="5 / 4" />
+                <ShowcaseImg label={e.title.toUpperCase()} tag={e.eyebrow} ratio="5 / 4">
+                  {e.illustration}
+                </ShowcaseImg>
                 <div className="p-5">
                   <div className="flex items-center justify-between">
                     <span className="eyebrow text-brass">{e.eyebrow}</span>
