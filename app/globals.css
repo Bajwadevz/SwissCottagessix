@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+   SWISS COTTAGES SIX — DESIGN SYSTEM (legacy + Tailwind entry)
+   ===================================================================== */
+
+:root {
+  --marquee-speed: 60s;
+  --bg: #131210;
+  --bg-2: #1a1814;
+  --surface: #211e19;
+  --surface-2: #2a2620;
+  --line: rgba(241, 237, 228, 0.1);
+  --line-2: rgba(241, 237, 228, 0.18);
+  --ink: #f1ede4;
+  --ink-mute: #b6b0a3;
+  --ink-dim: #7a7568;
+  --brass: #82976d;
+  --brass-2: #92a87a;
+  --pine: #4a5a3e;
+  --rose: #b86a4a;
+  --trust: #c9a96e;
+  --star: #e6c477;
+  --glass-bg: rgba(20, 18, 16, 0.55);
+  --glass-bd: rgba(241, 237, 228, 0.14);
+  --glass-bg-strong: rgba(20, 18, 16, 0.78);
+  --f-display: "Playfair Display", "Garamond", serif;
+  --f-ui: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, monospace;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 18px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.5);
+  --shadow-glass: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="light"] {
+  --bg: #f3eee5;
+  --bg-2: #ede7da;
+  --surface: #ffffff;
+  --surface-2: #f7f2e8;
+  --line: rgba(20, 18, 16, 0.1);
+  --line-2: rgba(20, 18, 16, 0.18);
+  --ink: #1a1814;
+  --ink-mute: #4d4a42;
+  --ink-dim: #7a7568;
+  --brass: #647b51;
+  --brass-2: #758e5f;
+  --pine: #3a4a30;
+  --glass-bg: rgba(255, 252, 244, 0.65);
+  --glass-bd: rgba(20, 18, 16, 0.1);
+  --glass-bg-strong: rgba(255, 252, 244, 0.85);
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  html,
+  body {
+    @apply m-0 min-h-screen p-0 antialiased;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-ui);
+    font-size: 16px;
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  img {
+    @apply block max-w-full;
+  }
+  a {
+    @apply text-inherit no-underline;
+  }
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+}
+
+.display {
+  font-family: var(--f-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+.display-italic {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.eyebrow {
+  font-family: var(--f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 600;
+}
+
+.section {
+  @apply py-20 md:py-[120px];
+}
+.container {
+  @apply mx-auto max-w-[1320px] px-[22px] md:px-10;
+}
+
+.btn {
+  @apply inline-flex items-center gap-2.5 whitespace-nowrap rounded-pill border border-transparent px-[22px] py-3.5 text-sm font-semibold tracking-wide transition-all duration-[240ms];
+  transition-timing-function: var(--ease-out);
+  min-height: 44px;
+}
+.btn-primary {
+  background: var(--brass);
+  color: #1a1610;
+}
+.btn-primary:hover {
+  background: var(--brass-2);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(184, 153, 104, 0.35);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+.btn-ghost:hover {
+  background: var(--surface);
+  border-color: var(--ink-dim);
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid var(--glass-bd);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-glass);
+}
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+}
+
+.placeholder-img {
+  position: relative;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(241, 237, 228, 0.04) 0 2px,
+      transparent 2px 14px
+    ),
+    linear-gradient(160deg, #2a2620 0%, #1a1814 100%);
+  color: var(--ink-mute);
+}
+[data-theme="light"] .placeholder-img {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(20, 18, 16, 0.05) 0 2px,
+      transparent 2px 14px
+    ),
+    linear-gradient(160deg, #e6dfd1 0%, #f0eadd 100%);
+}
+.placeholder-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 30%, rgba(184, 153, 104, 0.1), transparent 60%);
+}
+.placeholder-img .ph-label {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 14px 18px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.placeholder-img .ph-tag {
+  border: 1px solid var(--line-2);
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: var(--glass-bg);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-speed, 60s) linear infinite;
+}
+.marquee-track.paused {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fadeUp 900ms var(--ease-out) both;
+}
+
+.grain::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.5'/></svg>");
+  mix-blend-mode: overlay;
+  opacity: 0.18;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.hover-card .ph-label {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  nav .nav-links {
+    gap: 22px !important;
+  }
+}
+@media (max-width: 920px) {
+  nav .nav-links {
+    display: none !important;
+  }
+}
+
+::selection {
+  background: var(--brass);
+  color: #1a1610;
+}
+
+.rdp-root {
+  --rdp-accent-color: var(--brass);
+  --rdp-background-color: var(--surface);
+  color: var(--ink);
+}
