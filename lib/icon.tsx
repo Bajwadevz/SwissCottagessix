@@ -41,7 +41,7 @@ type IconProps = {
   size?: number;
   stroke?: number;
   className?: string;
-} & Omit<SVGProps<SVGSVGElement>, "name">;
+} & Omit<SVGProps<SVGSVGElement>, "name" | "stroke">;
 
 export function Icon({ name, size = 18, stroke = 1.6, className, ...rest }: IconProps) {
   const common = {

@@ -32,7 +32,7 @@ export async function GET() {
     try {
       const data = (await ical.async.fromURL(url, {
         headers: { "User-Agent": "SwissCottagesSix/1.0 (+https://vercel.com)" },
-      })) as Record<string, CalendarComponent>;
+      })) as unknown as Record<string, CalendarComponent>;
       blocks.push(...collectEvents(data));
     } catch (e) {
       console.error("[calendar] iCal error", url, e);
