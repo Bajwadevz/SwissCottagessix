@@ -50,12 +50,13 @@ export async function GET() {
 
   const supabase = getSupabaseAdmin();
   const rawKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
-  let jwtRole = "MISSING";
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "URL_MISSING";
+  let jwtRole = "KEY_MISSING";
   try {
     const payload = JSON.parse(Buffer.from(rawKey.split(".")[1] ?? "", "base64").toString());
     jwtRole = payload.role ?? "no-role";
   } catch { jwtRole = "decode-error"; }
-  console.log("[calendar] supabase:", supabase ? "ok" : "null", "key-role:", jwtRole);
+  console.log(`[cal-diag] client=${supabase?"ok":"null"} role=${jwtRole} url=${supabaseUrl} blocks=${blocks.length}`);
 
   if (supabase && blocks.length > 0) {
     // Upsert blocked dates into the bookings table for the frontend calendar
