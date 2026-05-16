@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 type Block = { start: string; end: string; uid: string; source: string };
 
