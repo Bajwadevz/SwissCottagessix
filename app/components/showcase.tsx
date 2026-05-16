@@ -141,7 +141,7 @@ export function Showcase() {
             <span className="display-italic text-brass">perfected</span> in Bhurban.
           </h2>
           <p className="mt-6 text-[17px] leading-relaxed text-ink-mute">
-            Conceived with a vision to bring alpine serenity to the Murree hills, Swiss Cottages Six was meticulously architected using genuine Swiss design principles. Operational since 2020, every detail of this sanctuary has been crafted for uncompromised comfort, featuring premium luxury furnishings exclusively by Interwood. It stands today as an elite retreat where timeless European elegance meets the misty peaks of Bhurban.
+            Conceived to bring alpine serenity to Bhurban, Murree Hills — just 2 minutes before Pearl Continental Bhurban — Swiss Cottages Six was meticulously architected using genuine Swiss design principles. Operational since 2020, every detail has been crafted for uncompromised comfort, featuring premium furnishings by Interwood. An elite private retreat where European elegance meets the misty Kashmir peaks.
           </p>
         </motion.div>
 
@@ -160,7 +160,7 @@ export function Showcase() {
             </h2>
           </div>
           <div className="m-0 max-w-[460px] justify-self-end text-base text-ink-mute md:text-right flex flex-col items-start md:items-end">
-            <p className="mb-3">Curated amenities for an uncompromising stay. The entire sanctuary is yours to command:</p>
+            <p className="mb-3">Luxury private cottage near PC Bhurban, Murree Hills. The entire sanctuary — up to 8 guests — is yours to command:</p>
             <div className="flex flex-wrap gap-2 justify-start md:justify-end">
               {[
                 "2 Floors", "3 Bedrooms", "2 Bathrooms", "Bespoke Furnishings", 

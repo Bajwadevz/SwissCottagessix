@@ -282,7 +282,7 @@ export function Hero() {
           className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-pill border border-glass-bd bg-glass-bg px-3.5 py-2 backdrop-blur-md"
         >
           <span className="size-1.5 rounded-full bg-brass" />
-          <span className="eyebrow text-ink">Exclusive Gated Estate · 12 Cottages · 6,800 ft Elevation</span>
+          <span className="eyebrow text-ink">Bhurban, Murree Hills · Gated Estate · 5 min from PC Bhurban · 6,800 ft</span>
         </motion.div>
 
         <motion.h1
@@ -302,7 +302,7 @@ export function Hero() {
           transition={{ delay: 0.22, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 max-w-[640px] text-[19px] text-ink-mute leading-relaxed"
         >
-          The pinnacle of alpine living. An elite sanctuary of twelve private cottages nestled in the heart of Bhurban—where uncompromised luxury meets the quiet mist.
+          Luxury private cottages near PC Bhurban, Murree Hills. An elite gated sanctuary of twelve residences at 6,800 ft — where uncompromised luxury meets the Kashmir peaks and mountain mist.
         </motion.p>
 
         <motion.div

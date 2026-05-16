@@ -17,7 +17,7 @@ export function Footer() {
               <span className="display-italic">Await</span>.
             </h2>
             <p className="mt-6 max-w-[460px] text-base text-ink-mute">
-              Experience uncompromised luxury with direct reservations. Avoid platform fees, bypass intermediaries, and enjoy direct contact with your host from the moment you book.
+              Experience uncompromised luxury at Bhurban, Murree Hills — 5 minutes from PC Bhurban. Book directly and avoid platform fees. Your host is one WhatsApp message away from the moment you reserve.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#book" className="btn btn-primary">
@@ -96,7 +96,7 @@ export function Footer() {
               <div className="display text-[22px]">Swiss Cottages Six</div>
             </div>
             <p className="mb-4 max-w-[320px] text-[13px] text-ink-mute">
-              An exclusive five-cottage sanctuary set within a private, twelve-cottage gated estate at 6,800 ft. Curated and managed by the Raza family since 1998.
+              Luxury private cottages near PC Bhurban, Murree Hills. An exclusive gated estate at 6,800 ft — curated for families up to 8 guests, managed by the Raza family since 1998.
             </p>
             <div className="flex gap-2.5">
               {[
