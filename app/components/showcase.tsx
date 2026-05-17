@@ -141,7 +141,7 @@ export function Showcase() {
             <span className="display-italic text-brass">perfected</span> in Bhurban.
           </h2>
           <p className="mt-6 text-[17px] leading-relaxed text-ink-mute">
-            Conceived to bring the spirit of alpine Switzerland to Bhurban's mist-draped ridgeline, Swiss Cottages Six was designed from first principles using authentic Swiss architectural heritage. Every fixture, material, and dimension was deliberate — premium Interwood furnishings, handcrafted timber accents, and double-insulated walls forged for mountain winters. A sanctuary where European elegance and Kashmir's eternal wilderness share the same view.
+            Conceived to bring the spirit of alpine Switzerland to Bhurban&apos;s mist-draped ridgeline, Swiss Cottages Six was designed from first principles using authentic Swiss architectural heritage. Every fixture, material, and dimension was deliberate — premium Interwood furnishings, handcrafted timber accents, and double-insulated walls forged for mountain winters. A sanctuary where European elegance and Kashmir&apos;s eternal wilderness share the same view.
           </p>
         </motion.div>
 

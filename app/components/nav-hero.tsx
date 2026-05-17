@@ -345,7 +345,7 @@ export function Hero() {
           transition={{ delay: 0.22, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 max-w-[640px] text-[19px] text-ink-mute leading-relaxed"
         >
-          An exclusive gated sanctuary at 6,800 ft in the Murree Hills — twelve private residences where alpine solitude meets the timeless grandeur of Kashmir's mist-draped peaks.
+          An exclusive gated sanctuary at 6,800 ft in the Murree Hills — twelve private residences where alpine solitude meets the timeless grandeur of Kashmir&apos;s mist-draped peaks.
         </motion.p>
 
         <motion.div
