@@ -252,8 +252,8 @@ export function GatedCommunity() {
           <div className="flex items-center gap-4 text-[13px] text-ink-mute">
             <span className="size-2 animate-pulse-dot rounded-full bg-brass" />
             <span>
-              <span className="font-semibold text-ink">2 cottages remain available</span> for the upcoming
-              season · waitlist averages 11 weeks
+              <span className="font-semibold text-ink">Limited availability</span> for the upcoming
+              season — waitlist averages 11 weeks
             </span>
           </div>
           <a href="#book" className="btn btn-primary py-3 pl-5 pr-5 text-[13px]">

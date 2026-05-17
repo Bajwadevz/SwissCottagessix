@@ -17,7 +17,7 @@ export function Footer() {
               <span className="display-italic">Await</span>.
             </h2>
             <p className="mt-6 max-w-[460px] text-base text-ink-mute">
-              Experience uncompromised luxury at Bhurban, Murree Hills — 5 minutes from PC Bhurban. Book directly and avoid platform fees. Your host is one WhatsApp message away from the moment you reserve.
+              Experience uncompromised luxury at Bhurban, Murree Hills — 2 minutes from Pearl Continental. Book directly and avoid platform fees. Your personal host is one WhatsApp message away from the moment you reserve.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#book" className="btn btn-primary">

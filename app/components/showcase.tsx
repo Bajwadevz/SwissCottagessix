@@ -141,7 +141,7 @@ export function Showcase() {
             <span className="display-italic text-brass">perfected</span> in Bhurban.
           </h2>
           <p className="mt-6 text-[17px] leading-relaxed text-ink-mute">
-            Conceived to bring alpine serenity to Bhurban, Murree Hills — just 2 minutes before Pearl Continental Bhurban — Swiss Cottages Six was meticulously architected using genuine Swiss design principles. Operational since 2020, every detail has been crafted for uncompromised comfort, featuring premium furnishings by Interwood. An elite private retreat where European elegance meets the misty Kashmir peaks.
+            Conceived to bring the spirit of alpine Switzerland to Bhurban's mist-draped ridgeline, Swiss Cottages Six was designed from first principles using authentic Swiss architectural heritage. Every fixture, material, and dimension was deliberate — premium Interwood furnishings, handcrafted timber accents, and double-insulated walls forged for mountain winters. A sanctuary where European elegance and Kashmir's eternal wilderness share the same view.
           </p>
         </motion.div>
 
@@ -154,13 +154,13 @@ export function Showcase() {
           <div>
             <span className="eyebrow text-brass">Cottage Six · Bhurban</span>
             <h2 className="display mt-3 text-[clamp(40px,5vw,64px)] leading-tight">
-              Location: 2 minutes before
+              2 minutes from
               <br />
-              <span className="display-italic">Pearl Continental</span> <span className="text-brass">Bhurban</span>.
+              <span className="display-italic">Pearl Continental</span>, <span className="text-brass">Bhurban</span>.
             </h2>
           </div>
           <div className="m-0 max-w-[460px] justify-self-end text-base text-ink-mute md:text-right flex flex-col items-start md:items-end">
-            <p className="mb-3">Luxury private cottage near PC Bhurban, Murree Hills. The entire sanctuary — up to 8 guests — is yours to command:</p>
+            <p className="mb-3">The entire cottage — up to 8 guests — is exclusively yours. No shared amenities, no compromises:</p>
             <div className="flex flex-wrap gap-2 justify-start md:justify-end">
               {[
                 "2 Floors", "3 Bedrooms", "2 Bathrooms", "Bespoke Furnishings", 
