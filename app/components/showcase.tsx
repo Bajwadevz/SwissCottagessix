@@ -179,39 +179,65 @@ export function Showcase() {
           id="gallery"
           className="grid auto-rows-[220px] grid-cols-12 gap-3.5"
         >
+          {/* Night exterior — most dramatic, anchors the gallery */}
           <div className="col-span-12 md:col-span-7 md:row-span-2">
             <HoverCard
               reveal={
-                <RevealBody eyebrow="Living Area" title="Spacious Living Room" sub="State of the art furniture and natural light." />
+                <RevealBody
+                  eyebrow="The Estate · Night"
+                  title="Your Private Cobblestone Lane"
+                  sub="Warm lantern-lit streets, A-frame rooflines, and the silence of Murree at night."
+                  meta={["Gated", "24/7 Security", "Private Parking"]}
+                />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/1.jpg" label="LIVING_ROOM — natural light" tag="Ground" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/exterior-night.jpg" label="ESTATE — cobblestone lane at night" tag="Exterior" ratio="auto" />
             </HoverCard>
           </div>
 
+          {/* Master bedroom */}
           <div className="col-span-12 md:col-span-5 md:row-span-2">
             <HoverCard
               reveal={
-                <RevealBody eyebrow="Bedroom" title="Comfortable Twin Room" sub="Cozy atmosphere with modern amenities." />
+                <RevealBody
+                  eyebrow="Master Bedroom · Floor 2"
+                  title="Elegant Master Suite"
+                  sub="Damask wallpaper, tray ceiling with recessed lighting, and a solid wood king bed."
+                />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/2.jpg" label="BEDROOM — twin beds" tag="Floor 1" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/bedroom-master.jpg" label="MASTER_BEDROOM — damask wallpaper, tray ceiling" tag="Floor 2" ratio="auto" />
             </HoverCard>
           </div>
 
-          <div className="col-span-12 md:col-span-6 md:row-span-2">
-            <HoverCard reveal={<RevealBody eyebrow="Master Bedroom" title="Elegant Master Suite" sub="Beautifully decorated with wood accents." />}>
-              <ShowcaseImg imgSrc="/cottage/3.jpg" label="MASTER_BEDROOM — wood ceiling" tag="Floor 2" ratio="auto" />
-            </HoverCard>
-          </div>
-
+          {/* Kitchen */}
           <div className="col-span-12 md:col-span-6 md:row-span-2">
             <HoverCard
               reveal={
-                <RevealBody eyebrow="Living Area" title="Cozy Seating Space" sub="Perfect for reading or relaxing." />
+                <RevealBody
+                  eyebrow="Chef's Kitchen"
+                  title="Fully Equipped Modular Kitchen"
+                  sub="Walnut cabinetry, Esquire built-in oven, 5-burner gas hob, and a breakfast bar."
+                  meta={["Oven", "Hob", "Extractor Hood", "Dishware"]}
+                />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/4.jpg" label="SEATING_AREA — reading corner" tag="Ground" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/kitchen.jpg" label="KITCHEN — walnut cabinetry, built-in oven" tag="Ground" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* Lounge */}
+          <div className="col-span-12 md:col-span-6 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="Living Area · Ground Floor"
+                  title="Curated Lounge & Entertainment"
+                  sub="Tufted velvet TV wall, flat-screen smart TV, board games, and handpicked décor."
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/lounge.jpg" label="LOUNGE — tufted velvet TV wall, smart TV" tag="Ground" ratio="auto" />
             </HoverCard>
           </div>
         </div>
