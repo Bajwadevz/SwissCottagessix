@@ -46,7 +46,6 @@ interface ApiResponse {
 
 const STORAGE_KEY = "sc6_chat_history";
 const MAX_STORED_MESSAGES = 30;
-const WA_BASE = "https://wa.me/923190514569";
 
 const GREETING: Message = {
   id: "greeting",
@@ -210,10 +209,17 @@ function CloseIcon() {
   );
 }
 
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const PHONE_DISPLAY = "+92 319 051 4569";
+const PHONE_HREF = "tel:+923190514569";
+const WA_HREF = "https://wa.me/923190514569?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20Swiss%20Cottages%20Six.";
+
 // ─── Main widget ──────────────────────────────────────────────────────────────
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<"chat" | "call">("chat");
   const [messages, setMessages] = useState<Message[]>([GREETING]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -261,13 +267,24 @@ export function ChatWidget() {
 
   // ── External trigger: any button can dispatch 'open-sasha' to open the chat ─
   useEffect(() => {
-    const handler = () => {
+    const chatHandler = () => {
+      setMode("chat");
       setOpen(true);
       setHasOpened(true);
       sessionStorage.setItem("sc6_chat_seen", "1");
     };
-    window.addEventListener("open-sasha", handler);
-    return () => window.removeEventListener("open-sasha", handler);
+    const callHandler = () => {
+      setMode("call");
+      setOpen(true);
+      setHasOpened(true);
+      sessionStorage.setItem("sc6_chat_seen", "1");
+    };
+    window.addEventListener("open-sasha", chatHandler);
+    window.addEventListener("open-sasha-call", callHandler);
+    return () => {
+      window.removeEventListener("open-sasha", chatHandler);
+      window.removeEventListener("open-sasha-call", callHandler);
+    };
   }, []);
 
   // ── Send message ───────────────────────────────────────────────────────────
@@ -348,8 +365,9 @@ export function ChatWidget() {
     }
   }
 
-  // ── Open chat ──────────────────────────────────────────────────────────────
-  function handleOpen() {
+  // ── Open widget ───────────────────────────────────────────────────────────
+  function handleOpen(m: "chat" | "call" = "chat") {
+    setMode(m);
     setOpen(true);
     setHasOpened(true);
     setUnread(0);
@@ -367,7 +385,7 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Bounce animation keyframes */}
+      {/* Animations */}
       <style>{`
         @keyframes chatBounce {
           0%, 80%, 100% { transform: translateY(0); }
@@ -377,9 +395,14 @@ export function ChatWidget() {
           0%, 100% { box-shadow: 0 0 0 0 rgba(184,153,104,0.4); }
           50% { box-shadow: 0 0 0 8px rgba(184,153,104,0); }
         }
+        @keyframes callRing {
+          0% { transform: scale(1); opacity: 1; }
+          80% { transform: scale(1.55); opacity: 0; }
+          100% { transform: scale(1.55); opacity: 0; }
+        }
       `}</style>
 
-      {/* ── Chat window ─────────────────────────────────────────────────────── */}
+      {/* ── Widget window ────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -389,164 +412,281 @@ export function ChatWidget() {
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
             className="fixed bottom-[88px] right-4 z-[9998] flex w-[360px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-line/60 bg-bg shadow-2xl shadow-black/30"
-            style={{ maxHeight: "min(540px, calc(100dvh - 120px))" }}
+            style={{ maxHeight: "min(580px, calc(100dvh - 120px))" }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-line/60 bg-gradient-to-r from-[rgba(184,153,104,0.12)] to-transparent px-4 py-3">
-              <div className="flex items-center gap-2.5">
-                <div className="relative flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-brass to-brass/60 text-[11px] font-bold text-[#1a1610]">
-                  SC
-                  <span className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full border-2 border-bg bg-green-400" />
+            {/* ── Header ─────────────────────────────────────────────────────── */}
+            <div className="border-b border-line/60 bg-gradient-to-r from-[rgba(184,153,104,0.12)] to-transparent px-4 py-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="relative flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-brass to-brass/60 text-[11px] font-bold text-[#1a1610]">
+                    SC
+                    <span className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full border-2 border-bg bg-green-400" />
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-semibold text-ink">Swiss Cottages Six</div>
+                    <div className="text-[11px] text-ink-dim">
+                      {mode === "chat" ? "Sasha · AI Concierge · Online" : "Talk to us · Bhurban, Murree"}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-[13px] font-semibold text-ink">Swiss Cottages Six</div>
-                  <div className="text-[11px] text-ink-dim">Sasha · AI Concierge · Online</div>
+                <div className="flex items-center gap-1">
+                  {mode === "chat" && (
+                    <button
+                      onClick={clearChat}
+                      title="New conversation"
+                      className="grid size-7 place-items-center rounded-lg text-ink-dim transition-colors hover:bg-surface hover:text-ink"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-3.5">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                        <path d="M3 3v5h5" />
+                      </svg>
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="grid size-7 place-items-center rounded-lg text-ink-dim transition-colors hover:bg-surface hover:text-ink"
+                  >
+                    <CloseIcon />
+                  </button>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
+
+              {/* ── Mode tabs ──────────────────────────────────────────────── */}
+              <div className="mt-3 flex gap-1 rounded-lg border border-line/50 bg-surface/60 p-0.5">
                 <button
-                  onClick={clearChat}
-                  title="New conversation"
-                  className="grid size-7 place-items-center rounded-lg text-ink-dim transition-colors hover:bg-surface hover:text-ink"
+                  onClick={() => setMode("chat")}
+                  className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-[12px] font-medium transition-all ${
+                    mode === "chat"
+                      ? "bg-brass text-[#1a1610] shadow-sm"
+                      : "text-ink-mute hover:text-ink"
+                  }`}
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-3.5">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                    <path d="M3 3v5h5" />
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
+                  Chat with Sasha
                 </button>
                 <button
-                  onClick={() => setOpen(false)}
-                  className="grid size-7 place-items-center rounded-lg text-ink-dim transition-colors hover:bg-surface hover:text-ink"
+                  onClick={() => setMode("call")}
+                  className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-[12px] font-medium transition-all ${
+                    mode === "call"
+                      ? "bg-brass text-[#1a1610] shadow-sm"
+                      : "text-ink-mute hover:text-ink"
+                  }`}
                 >
-                  <CloseIcon />
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-3.5">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.86-1.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  Call / Contact
                 </button>
               </div>
             </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4" style={{ overscrollBehavior: "contain" }}>
-              {messages.map((msg) => (
-                <MessageBubble key={msg.id} msg={msg} />
-              ))}
+            {/* ── Chat mode ──────────────────────────────────────────────────── */}
+            {mode === "chat" && (
+              <>
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto px-4 py-4" style={{ overscrollBehavior: "contain" }}>
+                  {messages.map((msg) => (
+                    <MessageBubble key={msg.id} msg={msg} />
+                  ))}
+                  {pendingWhatsApp && <WhatsAppHandoff url={pendingWhatsApp} />}
+                  {loading && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-3 flex justify-start">
+                      <div className="mr-2 flex size-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brass/80 to-brass/40 text-[10px] font-bold text-[#1a1610]">
+                        SC
+                      </div>
+                      <div className="rounded-2xl rounded-bl-sm border border-line/70 bg-surface px-3 py-2 shadow-sm">
+                        <TypingIndicator />
+                      </div>
+                    </motion.div>
+                  )}
+                  <div ref={bottomRef} />
+                </div>
 
-              {/* WhatsApp CTA from AI action */}
-              {pendingWhatsApp && (
-                <WhatsAppHandoff url={pendingWhatsApp} />
-              )}
+                {/* Quick chips */}
+                <div className="flex gap-2 overflow-x-auto border-t border-line/40 px-4 py-2 scrollbar-none">
+                  {[
+                    { label: "Availability", msg: "Is the cottage available this weekend?" },
+                    { label: "Pricing", msg: "What are the rates for 4 guests?" },
+                    { label: "Book via WhatsApp", msg: "I'd like to book via WhatsApp" },
+                  ].map((q) => (
+                    <button
+                      key={q.label}
+                      onClick={() => sendMessage(q.msg)}
+                      disabled={loading}
+                      className="shrink-0 rounded-full border border-brass/30 bg-brass/[0.06] px-3 py-1 text-[11px] font-medium text-brass transition-all hover:bg-brass/15 disabled:opacity-50"
+                    >
+                      {q.label}
+                    </button>
+                  ))}
+                </div>
 
-              {/* Typing indicator */}
-              {loading && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="mb-3 flex justify-start"
-                >
-                  <div className="mr-2 flex size-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brass/80 to-brass/40 text-[10px] font-bold text-[#1a1610]">
-                    SC
+                {/* Input */}
+                <div className="border-t border-line/60 bg-surface/50 px-3 py-3">
+                  <div className="flex items-end gap-2 rounded-xl border border-line/70 bg-bg px-3 py-2 focus-within:border-brass/50">
+                    <textarea
+                      ref={inputRef}
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Type in English, Urdu, or Roman Urdu…"
+                      rows={1}
+                      disabled={loading}
+                      className="flex-1 resize-none bg-transparent text-[13px] text-ink outline-none placeholder:text-ink-dim disabled:opacity-50"
+                      style={{ maxHeight: "80px" }}
+                      onInput={(e) => {
+                        const t = e.currentTarget;
+                        t.style.height = "auto";
+                        t.style.height = `${Math.min(t.scrollHeight, 80)}px`;
+                      }}
+                    />
+                    <button
+                      onClick={() => sendMessage(input)}
+                      disabled={!input.trim() || loading}
+                      className="grid size-8 shrink-0 place-items-center rounded-lg bg-brass text-[#1a1610] transition-all hover:brightness-110 disabled:opacity-40"
+                    >
+                      <SendIcon />
+                    </button>
                   </div>
-                  <div className="rounded-2xl rounded-bl-sm border border-line/70 bg-surface px-3 py-2 shadow-sm">
-                    <TypingIndicator />
+                  <button
+                    onClick={() => setMode("call")}
+                    className="mt-2 flex w-full items-center justify-center gap-1 text-[10px] text-ink-dim hover:text-brass transition-colors"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-3">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.86-1.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    Prefer to speak directly? Call us
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ── Call / Contact mode ─────────────────────────────────────────── */}
+            {mode === "call" && (
+              <div className="flex flex-1 flex-col overflow-y-auto px-5 py-6">
+                {/* Pulsing ring + avatar */}
+                <div className="mx-auto mb-6 flex flex-col items-center gap-3">
+                  <div className="relative">
+                    <div
+                      className="absolute inset-0 rounded-full bg-brass/25"
+                      style={{ animation: "callRing 2s ease-out infinite" }}
+                    />
+                    <div
+                      className="absolute inset-0 rounded-full bg-brass/15"
+                      style={{ animation: "callRing 2s ease-out 0.4s infinite" }}
+                    />
+                    <div className="relative flex size-16 items-center justify-center rounded-full bg-gradient-to-br from-brass to-brass/60 text-[18px] font-bold text-[#1a1610]">
+                      SC
+                    </div>
                   </div>
-                </motion.div>
-              )}
+                  <div className="text-center">
+                    <div className="text-[15px] font-semibold text-ink">Swiss Cottages Six</div>
+                    <div className="text-[12px] text-ink-mute">Bhurban, Murree Hills · Est. 1998</div>
+                  </div>
+                </div>
 
-              <div ref={bottomRef} />
-            </div>
-
-            {/* Quick actions */}
-            <div className="flex gap-2 overflow-x-auto border-t border-line/40 px-4 py-2 scrollbar-none">
-              {[
-                { label: "Check availability", msg: "Is the cottage available this weekend?" },
-                { label: "Pricing", msg: "What are your rates for 4 guests?" },
-                { label: "Book on WhatsApp", msg: "I'd like to book via WhatsApp" },
-              ].map((q) => (
-                <button
-                  key={q.label}
-                  onClick={() => sendMessage(q.msg)}
-                  disabled={loading}
-                  className="shrink-0 rounded-full border border-brass/30 bg-brass/[0.06] px-3 py-1 text-[11px] font-medium text-brass transition-all hover:bg-brass/15 disabled:opacity-50"
-                >
-                  {q.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Input area */}
-            <div className="border-t border-line/60 bg-surface/50 px-3 py-3">
-              <div className="flex items-end gap-2 rounded-xl border border-line/70 bg-bg px-3 py-2 focus-within:border-brass/50">
-                <textarea
-                  ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="Type in English, Urdu, or Roman Urdu…"
-                  rows={1}
-                  disabled={loading}
-                  className="flex-1 resize-none bg-transparent text-[13px] text-ink outline-none placeholder:text-ink-dim disabled:opacity-50"
-                  style={{ maxHeight: "80px" }}
-                  onInput={(e) => {
-                    const t = e.currentTarget;
-                    t.style.height = "auto";
-                    t.style.height = `${Math.min(t.scrollHeight, 80)}px`;
-                  }}
-                />
-                <button
-                  onClick={() => sendMessage(input)}
-                  disabled={!input.trim() || loading}
-                  className="grid size-8 shrink-0 place-items-center rounded-lg bg-brass text-[#1a1610] transition-all hover:brightness-110 disabled:opacity-40"
-                >
-                  <SendIcon />
-                </button>
-              </div>
-              {/* WhatsApp direct link in footer */}
-              <div className="mt-2 flex items-center justify-center gap-1.5 text-[10px] text-ink-dim">
-                <span>Prefer to talk?</span>
+                {/* Direct call */}
                 <a
-                  href={WA_BASE}
+                  href={PHONE_HREF}
+                  className="mb-3 flex items-center justify-center gap-2.5 rounded-xl bg-brass px-5 py-3.5 text-[14px] font-semibold text-[#1a1610] shadow-sm transition-all hover:brightness-110 active:scale-95"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="size-4 shrink-0">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.86-1.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  Call {PHONE_DISPLAY}
+                </a>
+
+                {/* WhatsApp */}
+                <a
+                  href={WA_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-0.5 text-[#25D366] hover:underline"
+                  className="mb-3 flex items-center justify-center gap-2.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-5 py-3.5 text-[14px] font-semibold text-[#25D366] transition-all hover:bg-[#25D366]/20 active:scale-95"
                 >
                   <WhatsAppIcon />
-                  WhatsApp us directly
+                  WhatsApp {PHONE_DISPLAY}
                 </a>
+
+                {/* Divider */}
+                <div className="my-3 flex items-center gap-3 text-[11px] text-ink-dim">
+                  <div className="flex-1 border-t border-line/40" />
+                  or chat with our AI concierge
+                  <div className="flex-1 border-t border-line/40" />
+                </div>
+
+                {/* Chat mode CTA */}
+                <button
+                  onClick={() => setMode("chat")}
+                  className="mb-4 flex items-center justify-center gap-2 rounded-xl border border-line/60 bg-surface px-5 py-3 text-[13px] font-medium text-ink transition-all hover:border-brass/40 hover:text-brass"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-4 shrink-0">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  Ask Sasha — instant AI answers
+                </button>
+
+                {/* Hours note */}
+                <div className="rounded-lg border border-line/40 bg-surface/60 px-4 py-3 text-center text-[11px] text-ink-mute">
+                  <span className="font-semibold text-ink">Response time:</span> calls answered 9am–10pm PKT
+                  <br />
+                  Outside hours? WhatsApp for a reply within 2 hrs.
+                </div>
               </div>
-            </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── Floating trigger button ──────────────────────────────────────────── */}
+      {/* ── Floating trigger — split: chat + call ────────────────────────────── */}
       <AnimatePresence>
         {!open && (
-          <motion.button
+          <motion.div
             key="chat-fab"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            onClick={handleOpen}
-            aria-label="Open Swiss Cottages AI assistant"
-            className="fixed bottom-[88px] right-4 z-[9998] flex items-center gap-2.5 rounded-full border border-brass/30 bg-bg px-4 py-3 shadow-lg shadow-black/20 transition-all hover:border-brass/60 hover:shadow-brass/20"
+            className="fixed bottom-[88px] right-4 z-[9998] flex items-center overflow-hidden rounded-full border border-brass/30 bg-bg shadow-lg shadow-black/20"
             style={{
               animation: !hasOpened ? "chatPulse 2.5s ease-in-out 3s 3" : undefined,
             }}
           >
-            {/* Icon */}
-            <div className="relative flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-brass to-brass/70">
-              <SparkleIcon />
-              {unread > 0 && (
-                <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
-                  {unread}
-                </span>
-              )}
-            </div>
-            {/* Label */}
-            <div className="text-left">
-              <div className="text-[12px] font-semibold text-ink">Ask Sasha</div>
-              <div className="text-[10px] text-ink-dim">AI Concierge</div>
-            </div>
-          </motion.button>
+            {/* Chat side */}
+            <button
+              onClick={() => handleOpen("chat")}
+              aria-label="Chat with Sasha"
+              className="flex items-center gap-2.5 px-4 py-3 transition-all hover:bg-surface"
+            >
+              <div className="relative flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-brass to-brass/70">
+                <SparkleIcon />
+                {unread > 0 && (
+                  <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
+                    {unread}
+                  </span>
+                )}
+              </div>
+              <div className="text-left">
+                <div className="text-[12px] font-semibold text-ink">Ask Sasha</div>
+                <div className="text-[10px] text-ink-dim">AI Concierge</div>
+              </div>
+            </button>
+
+            {/* Divider */}
+            <div className="h-8 w-px bg-line/60" />
+
+            {/* Call side */}
+            <button
+              onClick={() => handleOpen("call")}
+              aria-label="Call us"
+              className="flex items-center justify-center px-3.5 py-3 text-ink-mute transition-all hover:bg-surface hover:text-brass"
+              title={`Call ${PHONE_DISPLAY}`}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-4">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.86-1.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
