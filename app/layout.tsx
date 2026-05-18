@@ -8,6 +8,7 @@ import "./globals.css";
 
 import { VapiBridge } from "./components/vapi-bridge";
 import { WhatsAppFAB } from "./components/whatsapp-fab";
+import { ChatWidget } from "./components/chat-widget";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>{children}</Providers>
         <VapiBridge />
         <WhatsAppFAB />
+        <ChatWidget />
       </body>
     </html>
   );

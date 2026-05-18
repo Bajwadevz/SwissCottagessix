@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
     "@supabase/supabase-js": "^2.49.1",
     "@vapi-ai/client-sdk-react": "^0.1.1",
     "@vapi-ai/web": "^2.5.0",
