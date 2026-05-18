@@ -209,7 +209,7 @@ export function SocialProof() {
                 </div>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-ink-mute">
-                Rated 5.0 stars on Google. Guests consistently highlight the panoramic mountain views, privacy, and proximity to Pearl Continental Bhurban.
+                Verified guest reviews showcasing our commitment to unparalleled alpine hospitality and uncompromised luxury.
               </p>
             </div>
             <div className="mt-8 flex items-center gap-2 text-[13px] font-semibold text-brass transition-transform duration-300 group-hover:translate-x-1">

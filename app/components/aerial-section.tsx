@@ -84,7 +84,7 @@ export function AerialSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[72%] text-center"
+        className="absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 text-center"
       >
         <h2 className="display text-[clamp(26px,4vw,50px)] leading-tight text-white drop-shadow-lg">
           Twelve residences.
