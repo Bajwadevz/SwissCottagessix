@@ -264,10 +264,10 @@ export function SocialProof() {
                   <img src="/cottage/bedroom-view.jpg" alt="Master suite with pine-timber ceiling and mountain view" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
                 <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/lounge.jpg" alt="Open-plan lounge with navy sofas and timber blinds" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                  <img src="/cottage/kitchen.jpg" alt="Modular kitchen with Esquire oven and walnut cabinetry" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
                 <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/bedroom-upper.jpg" alt="A-frame upper suite with sailing mural and pine ceiling" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                  <img src="/cottage/exterior-night.jpg" alt="Cobblestone estate lane at night with amber lanterns" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
               </div>
             </div>

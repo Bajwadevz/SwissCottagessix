@@ -195,8 +195,70 @@ export function Showcase() {
             </HoverCard>
           </div>
 
-          {/* A-frame upper bedroom with sailing mural */}
+          {/* Kitchen */}
           <div className="col-span-12 md:col-span-5 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="Chef's Kitchen · Ground Floor"
+                  title="Fully Equipped Modular Kitchen"
+                  sub="Walnut cabinetry, Esquire built-in oven & microwave, 5-burner gas hob, extraction hood, and breakfast bar stool."
+                  meta={["Built-in Oven", "Gas Hob", "Extractor Hood"]}
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/kitchen.jpg" label="KITCHEN — walnut cabinetry, Esquire oven, gas hob" tag="Ground" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* TV lounge */}
+          <div className="col-span-12 md:col-span-4 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="Entertainment Lounge · Ground Floor"
+                  title="Tufted Velvet TV Wall"
+                  sub="Bespoke tufted velvet feature wall, TCL smart TV, walnut media console with board games — evenings well spent."
+                  meta={["Smart TV", "Netflix", "Board Games"]}
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/tv-wall.jpg" label="LOUNGE — tufted velvet TV wall, media console" tag="Ground" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* Night exterior */}
+          <div className="col-span-12 md:col-span-4 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="The Estate · Night"
+                  title="Lantern-Lit Cobblestone Lane"
+                  sub="Private cobblestone street, warm amber lanterns, A-frame rooflines — the silence of 6,800 ft after dark."
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/exterior-night.jpg" label="ESTATE — cobblestone lane at night, lanterns" tag="Exterior" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* Bathroom master */}
+          <div className="col-span-12 md:col-span-4 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="Master Bathroom · En-Suite"
+                  title="Stone-Tile Wet Room"
+                  sub="Full-height stone tiles, glass shower screen, backlit vanity mirror, and 24/7 hot water at 6,800 ft."
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/bathroom.jpg" label="BATHROOM — stone tiles, glass shower, vanity" tag="En-suite" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* A-frame upper bedroom */}
+          <div className="col-span-12 md:col-span-6 md:row-span-2">
             <HoverCard
               reveal={
                 <RevealBody
@@ -208,22 +270,6 @@ export function Showcase() {
               }
             >
               <ShowcaseImg imgSrc="/cottage/bedroom-upper.jpg" label="UPPER_SUITE — pine ceiling, twin beds, sailing mural" tag="Floor 2" ratio="auto" />
-            </HoverCard>
-          </div>
-
-          {/* TV lounge */}
-          <div className="col-span-12 md:col-span-6 md:row-span-2">
-            <HoverCard
-              reveal={
-                <RevealBody
-                  eyebrow="Living Room · Ground Floor"
-                  title="Sunlit Open-Plan Lounge"
-                  sub="Navy velvet sofas, slatted timber blinds, recessed lighting, and marble-finish flooring bathed in afternoon light."
-                  meta={["Smart TV", "Netflix", "Climate Control"]}
-                />
-              }
-            >
-              <ShowcaseImg imgSrc="/cottage/lounge.jpg" label="LOUNGE — blue sofas, timber blinds, recessed lighting" tag="Ground" ratio="auto" />
             </HoverCard>
           </div>
 
