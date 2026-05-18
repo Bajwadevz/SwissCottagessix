@@ -6,7 +6,6 @@ import { Providers } from "./providers";
 
 import "./globals.css";
 
-import { VapiBridge } from "./components/vapi-bridge";
 import { WhatsAppFAB } from "./components/whatsapp-fab";
 import { ChatWidget } from "./components/chat-widget";
 
@@ -118,7 +117,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}</style>
         <JsonLd />
         <Providers>{children}</Providers>
-        <VapiBridge />
         <WhatsAppFAB />
         <ChatWidget />
       </body>
