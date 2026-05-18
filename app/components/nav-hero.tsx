@@ -325,7 +325,7 @@ export function Hero() {
           className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-pill border border-glass-bd bg-glass-bg px-3.5 py-2 backdrop-blur-md"
         >
           <span className="size-1.5 rounded-full bg-brass" />
-          <span className="eyebrow text-ink">Bhurban, Murree Hills · Private Gated Estate · 2 min from PC Bhurban · 6,800 ft</span>
+          <span className="eyebrow text-ink">Bhurban, Murree Hills · 2 min from PC Bhurban · 6,800 ft · ★ 9.2 / 10</span>
         </motion.div>
 
         <motion.h1

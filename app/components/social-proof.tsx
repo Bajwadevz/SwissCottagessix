@@ -209,7 +209,7 @@ export function SocialProof() {
                 </div>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-ink-mute">
-                Verified guest reviews showcasing our commitment to unparalleled alpine hospitality and uncompromised luxury.
+                Rated 5.0 stars on Google. Guests consistently highlight the panoramic mountain views, privacy, and proximity to Pearl Continental Bhurban.
               </p>
             </div>
             <div className="mt-8 flex items-center gap-2 text-[13px] font-semibold text-brass transition-transform duration-300 group-hover:translate-x-1">
@@ -234,7 +234,7 @@ export function SocialProof() {
                 </div>
               </div>
               <p className="mt-4 text-sm leading-relaxed text-ink-mute">
-                Recognized with the Traveler Review Award for exceptional service, location, and guest experience in Bhurban.
+                Awarded the Traveller Review Award. Guests from 23 countries rate Swiss Cottages Six 9.2/10 for location, comfort, and exceptional value.
               </p>
             </div>
             <div className="mt-8 flex items-center gap-2 text-[13px] font-semibold text-[#0071c2] transition-transform duration-300 group-hover:translate-x-1 dark:text-[#3399ff]">
@@ -261,13 +261,13 @@ export function SocialProof() {
               
               <div className="mt-5 grid grid-cols-3 gap-2">
                 <div className="aspect-square overflow-hidden rounded bg-line">
+                  <img src="/cottage/aerial.jpg" alt="Aerial view of Swiss Cottages Six gated estate" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+                <div className="aspect-square overflow-hidden rounded bg-line">
+                  <img src="/cottage/lounge.jpg" alt="Spacious sun-drenched living room lounge" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+                <div className="aspect-square overflow-hidden rounded bg-line">
                   <img src="/cottage/bedroom-view.jpg" alt="Master suite with pine-timber ceiling and mountain view" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
-                <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/kitchen.jpg" alt="Modular kitchen with Esquire oven and walnut cabinetry" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
-                <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/exterior-night.jpg" alt="Cobblestone estate lane at night with amber lanterns" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
               </div>
             </div>
@@ -275,6 +275,16 @@ export function SocialProof() {
               Explore our journal <Icon name="arrow" size={14} />
             </div>
           </a>
+        </div>
+
+        <div className="mx-auto mb-10 flex max-w-3xl items-center justify-center gap-2 rounded-xl border border-brass/25 bg-brass/[0.05] px-6 py-3 text-[13px] text-ink-mute">
+          <span className="text-brass">📍</span>
+          <span>
+            <strong className="text-ink">Swiss Cottages Six</strong> · Off PC Bhurban Road, Bhurban, Murree Hills ·{" "}
+            <a href="https://maps.app.goo.gl/xuDvuCaRxPECUBzB7" target="_blank" rel="noopener noreferrer" className="font-semibold text-brass hover:underline">
+              View on Google Maps
+            </a>
+          </span>
         </div>
       </div>
 

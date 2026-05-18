@@ -14,14 +14,15 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "LodgingBusiness",
+        "@type": ["LodgingBusiness", "Resort"],
         "@id": `${url}/#lodging`,
-        name: "Swiss Cottages Six",
+        name: "Swiss Cottages Six — Luxury Cottages Bhurban Murree",
         description:
-          "Luxury private cottages near PC Bhurban, Murree Hills — exclusive gated estate at 6,800 ft with panoramic Kashmir peak views, 24/7 security, and direct booking.",
+          "Best luxury cottages near PC Bhurban Murree Hills. Exclusive gated estate at 6,800 ft — 2 minutes from Pearl Continental Bhurban. Private villa for families up to 8 guests. Direct booking from PKR 28,000/night.",
         url,
         telephone: "+92-319-0514569",
         priceRange: "PKR 28,000 – PKR 45,000 per night",
+        starRating: { "@type": "Rating", ratingValue: "5" },
         address: {
           "@type": "PostalAddress",
           streetAddress: "Off PC Bhurban Road",
@@ -44,6 +45,33 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
           ratingCount: 384,
           reviewCount: 384,
         },
+        nearbyAttractions: [
+          {
+            "@type": "TouristAttraction",
+            name: "Pearl Continental Bhurban",
+            description: "Luxury 5-star hotel and championship golf course",
+            geo: { "@type": "GeoCoordinates", latitude: 33.961, longitude: 73.454 },
+            distance: "0.4 km",
+          },
+          {
+            "@type": "TouristAttraction",
+            name: "Murree Hills Trails",
+            description: "Pristine pine-covered hiking trails with panoramic alpine views",
+            distance: "5 km",
+          },
+          {
+            "@type": "TouristAttraction",
+            name: "Patriata Chair Lift",
+            description: "Iconic chairlift ascending to panoramic valley views",
+            distance: "20 km",
+          },
+          {
+            "@type": "TouristAttraction",
+            name: "Mall Road Murree",
+            description: "Bustling epicenter of Murree with dining and retail",
+            distance: "9 km",
+          },
+        ],
         makesOffer: {
           "@type": "Offer",
           itemOffered: { "@id": id },
@@ -126,6 +154,22 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
               text: "Yes. Direct bookings are encouraged — you avoid all platform fees and receive the best available rate. Contact us via WhatsApp at +92 319 0514569 or use the booking calendar on our website.",
             },
           },
+          {
+            "@type": "Question",
+            name: "What are the best places to stay near PC Bhurban?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Swiss Cottages Six is widely considered the finest private accommodation adjacent to Pearl Continental Bhurban — a fully gated estate of luxury Swiss-architecture cottages at 6,800 ft with panoramic Kashmir views.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How far is Swiss Cottages Six from Islamabad?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Approximately 1.5–2 hours via the M-2 motorway and Murree Expressway. The estate is in Bhurban, 2 minutes from Pearl Continental, and offers private parking for every cottage.",
+            },
+          },
         ],
       },
       {
@@ -144,6 +188,8 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
         url,
         description:
           "Private luxury cottage near PC Bhurban, Murree. 3 bedrooms, maximum 8 guests. Gated estate at 6,800 ft with panoramic Kashmir views, Interwood furnishings, WiFi, and 24/7 hot water.",
+        keywords:
+          "best places to stay in Murree, top hotels Bhurban, luxury cottage near PC Bhurban, family villa Murree Hills, gated resort Bhurban, Swiss cottage Murree",
         containedInPlace: { "@id": `${url}/#lodging` },
         geo: {
           "@type": "GeoCoordinates",

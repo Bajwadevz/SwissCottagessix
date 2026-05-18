@@ -94,6 +94,13 @@ export function AerialSection() {
         <p className="mx-auto mt-3 max-w-[400px] text-[13px] leading-relaxed text-white/55 drop-shadow">
           Seen from above — the gated estate at 6,800 ft in the Murree Hills.
         </p>
+        <div className="mt-4 flex items-center justify-center gap-4 text-[11px] font-mono text-white/45">
+          <span>Off PC Bhurban Road · Bhurban, Murree</span>
+          <span className="text-white/25">·</span>
+          <a href="https://maps.app.goo.gl/xuDvuCaRxPECUBzB7" target="_blank" rel="noopener noreferrer" className="text-brass/70 hover:text-brass transition-colors">
+            Google Maps ↗
+          </a>
+        </div>
       </motion.div>
 
       {/* Stats bar */}

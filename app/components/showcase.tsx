@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
 
 import { Icon } from "@/lib/icon";
@@ -26,7 +27,13 @@ function ShowcaseImg({
       style={{ aspectRatio: ratio }}
     >
       {imgSrc ? (
-        <img src={imgSrc} alt={label} className="absolute inset-0 h-full w-full object-cover" />
+        <Image
+          src={imgSrc}
+          alt={label}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
       ) : accent ? (
         <div
           className="absolute inset-0"
@@ -197,17 +204,17 @@ export function Showcase() {
             </HoverCard>
           </div>
 
-          {/* TV lounge */}
+          {/* Lounge */}
           <div className="col-span-12 md:col-span-4 md:row-span-2">
             <HoverCard
               reveal={
                 <RevealBody
-                  eyebrow="Entertainment Lounge · Ground Floor"
-                  title="Tufted Velvet TV Wall"
+                  eyebrow="Living Room · Ground Floor"
+                  title="Spacious Sun-Drenched Lounge"
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/tv-wall.jpg" label="LOUNGE — tufted velvet TV wall, media console" tag="Ground" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/lounge.jpg" label="LOUNGE — spacious sun-drenched living room" tag="Ground" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -239,31 +246,31 @@ export function Showcase() {
             </HoverCard>
           </div>
 
-          {/* A-frame upper bedroom */}
+          {/* A-frame master suite */}
           <div className="col-span-12 md:col-span-6 md:row-span-2">
             <HoverCard
               reveal={
                 <RevealBody
-                  eyebrow="Upper Suite · Floor 2"
-                  title="A-Frame Twin Retreat"
+                  eyebrow="Pine-Ceiling Suite · Floor 2"
+                  title="A-Frame Master Suite"
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/bedroom-upper.jpg" label="UPPER_SUITE — pine ceiling, twin beds, sailing mural" tag="Floor 2" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/master-suite.jpg" label="MASTER_SUITE — pine ceiling, A-frame master bedroom" tag="Floor 2" ratio="auto" />
             </HoverCard>
           </div>
 
-          {/* A-frame sitting corner */}
+          {/* Study nook */}
           <div className="col-span-12 md:col-span-6 md:row-span-2">
             <HoverCard
               reveal={
                 <RevealBody
-                  eyebrow="Reading Nook · Floor 2"
-                  title="Quiet A-Frame Sitting Corner"
+                  eyebrow="Study Nook · Mountain View"
+                  title="Pine Forest Through Every Window"
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/bedroom-sitting.jpg" label="SITTING_CORNER — armchairs, pine ceiling, art wall" tag="Floor 2" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/study.jpg" label="STUDY — pine forest mountain view study nook" tag="Floor 2" ratio="auto" />
             </HoverCard>
           </div>
         </div>
@@ -319,7 +326,9 @@ export function Showcase() {
                 key={i}
                 className="flex flex-col overflow-hidden rounded-lg border border-line bg-surface"
               >
-                <ShowcaseImg imgSrc={e.imgSrc} label={e.title.toUpperCase()} tag={e.eyebrow} ratio="5 / 4" />
+                <div style={{ aspectRatio: "5 / 4", position: "relative" }} className="relative overflow-hidden rounded-lg">
+                  <Image src={e.imgSrc} alt={e.title} fill sizes="(max-width: 768px) 100vw, 20vw" className="object-cover" />
+                </div>
                 <div className="p-5">
                   <div className="flex items-center justify-between">
                     <span className="eyebrow text-brass">{e.eyebrow}</span>

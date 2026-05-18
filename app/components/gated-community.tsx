@@ -172,10 +172,10 @@ export function GatedCommunity() {
   const highlights = [
     {
       icon: "award" as const,
-      eyebrow: "5 Minutes",
-      title: "Pearl Continental & Championship Golf",
-      desc: "The Pearl Continental hotel, championship golf course, and the vibrant Bhurban dining strip—all accessible within a mere five-minute drive from our gate.",
-      meta: "0.4 km / 5 min drive",
+      eyebrow: "2 Minutes",
+      title: "Pearl Continental Bhurban · 2 min",
+      desc: "The Pearl Continental hotel, championship golf course, and the vibrant Bhurban dining strip—all accessible within a mere two-minute drive from our gate.",
+      meta: "0.4 km / 2 min drive",
     },
     {
       icon: "mountain" as const,
@@ -246,6 +246,22 @@ export function GatedCommunity() {
               </motion.div>
             ))}
           </div>
+        </div>
+
+        <div className="mt-5 flex flex-wrap items-center gap-6 rounded-lg border border-line bg-surface px-6 py-4">
+          <div className="flex items-center gap-2.5 text-[13px] text-ink-mute">
+            <Icon name="pin" size={15} className="text-brass shrink-0" />
+            <span><strong className="text-ink font-semibold">Off PC Bhurban Road</strong>, Bhurban, Murree Hills, Punjab 47150</span>
+          </div>
+          <a
+            href="https://maps.app.goo.gl/xuDvuCaRxPECUBzB7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-[12px] font-semibold text-brass hover:underline"
+          >
+            Open in Google Maps <Icon name="arrow" size={12} />
+          </a>
+          <div className="ml-auto font-mono text-[11px] text-ink-dim">33.9603°N · 73.4538°E</div>
         </div>
 
         <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-dashed border-line-2 bg-surface px-6 py-5 md:px-7">

@@ -33,11 +33,11 @@ const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://swisscottagessix.com";
 export const metadata: Metadata = {
   metadataBase: new URL(site),
   title: {
-    default: "Swiss Cottages Six — Luxury Cottage Bhurban Murree | Private Villa near PC Hotel",
+    default: "Swiss Cottages Six — Best Luxury Cottages Bhurban Murree | 2 min from PC Hotel",
     template: "%s · Swiss Cottages Six",
   },
   description:
-    "Book a private luxury cottage in Bhurban, Murree Hills — 2 minutes from PC Bhurban. Exclusive gated estate at 6,800 ft. 3 bedrooms, up to 8 guests. Direct booking PKR 28,000/night. No Airbnb fees. Family villas & weekend getaways near Islamabad.",
+    "Best place to stay near PC Bhurban Murree — exclusive gated alpine estate at 6,800 ft. Private luxury cottage, 3 bedrooms, up to 8 guests, panoramic Kashmir views. Direct booking from PKR 28,000/night. Top-rated: 9.2/10 · 384 verified stays.",
   keywords: [
     "Luxury Cottage Bhurban",
     "Family Villa Murree",
@@ -63,15 +63,20 @@ export const metadata: Metadata = {
     "best cottage Bhurban",
     "holiday rental Murree",
     "PC Bhurban hotel alternative",
+    "best places to stay in Murree",
+    "top hotels Bhurban",
+    "best hotel near PC Bhurban",
+    "luxury resort Bhurban",
+    "best cottage Murree Hills",
   ],
   openGraph: {
     type: "website",
     locale: "en_PK",
     url: site,
     siteName: "Swiss Cottages Six",
-    title: "Swiss Cottages Six — Luxury Cottage Bhurban, Murree Hills",
+    title: "Swiss Cottages Six — Best Luxury Cottages in Bhurban, Murree Hills",
     description:
-      "Luxury private cottage near PC Bhurban, Murree. 3 bedrooms, up to 8 guests, gated estate at 6,800 ft. Direct booking from PKR 28,000/night — no platform fees.",
+      "Rated 9.2/10 across 384 stays. Exclusive gated estate 2 min from PC Bhurban — 3 bedrooms, up to 8 guests, panoramic Kashmir views. Direct booking from PKR 28,000/night.",
     images: [
       {
         url: `${site}/cottage/aerial.jpg`,

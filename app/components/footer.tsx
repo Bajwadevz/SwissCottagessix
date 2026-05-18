@@ -33,44 +33,24 @@ export function Footer() {
             href="https://maps.app.goo.gl/xuDvuCaRxPECUBzB7"
             target="_blank"
             rel="noopener noreferrer"
-            className="placeholder-img group relative block min-h-[280px] rounded-lg border border-line transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg"
+            className="group relative block min-h-[280px] overflow-hidden rounded-lg border border-line transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg"
           >
-            <svg width="100%" height="100%" viewBox="0 0 400 280" className="absolute inset-0">
-              <defs>
-                <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-                  <path
-                    d="M 32 0 L 0 0 0 32"
-                    fill="none"
-                    stroke="rgba(241,237,228,0.05)"
-                    strokeWidth="1"
-                  />
-                </pattern>
-              </defs>
-              <rect width="400" height="280" fill="url(#grid)" />
-              <path
-                d="M0,180 Q100,160 180,170 T400,150"
-                stroke="rgba(184,153,104,0.4)"
-                strokeWidth="1.5"
-                fill="none"
-              />
-              <path
-                d="M0,210 Q120,200 220,215 T400,195"
-                stroke="rgba(184,153,104,0.25)"
-                strokeWidth="1"
-                fill="none"
-              />
-              <path
-                d="M180,0 Q200,80 195,140 T220,280"
-                stroke="rgba(74,90,62,0.3)"
-                strokeWidth="1.5"
-                fill="none"
-              />
-              <circle cx="220" cy="140" r="8" fill="var(--brass)" />
-              <circle cx="220" cy="140" r="20" fill="none" stroke="var(--brass)" strokeWidth="1" opacity="0.5" />
-              <circle cx="220" cy="140" r="32" fill="none" stroke="var(--brass)" strokeWidth="1" opacity="0.2" className="transition-all duration-300 group-hover:r-[40px] group-hover:opacity-40" />
-            </svg>
-            <div className="absolute left-[18px] top-[18px] rounded-pill border border-glass-bd bg-glass-strong px-3 py-1.5 font-mono text-[11px] transition-colors group-hover:border-brass group-hover:text-brass">
-              33.9603° N, 73.4538° E <Icon name="arrow" size={10} className="inline ml-1" />
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3316.2!2d73.4538!3d33.9603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDU3JzM3LjEiTiA3M8KwMjcnMTMuNyJF!5e0!3m2!1sen!2spk!4v1"
+              width="100%"
+              height="100%"
+              style={{ border: 0, position: "absolute", inset: 0, filter: "grayscale(30%) contrast(1.05)" }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Swiss Cottages Six location map — Bhurban, Murree Hills"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,9,7,0.7)] via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
+              <div className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-black/40 px-3 py-1.5 font-mono text-[11px] text-white/80 backdrop-blur-sm">
+                <span className="size-1.5 rounded-full bg-brass" />
+                Off PC Bhurban Road · Bhurban, Murree · 33.9603°N, 73.4538°E
+              </div>
             </div>
           </a>
         </div>
@@ -129,6 +109,14 @@ export function Footer() {
               <br />
               Punjab 47150, Pakistan
             </div>
+            <a
+              href="https://maps.app.goo.gl/xuDvuCaRxPECUBzB7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex items-center gap-1.5 text-[12px] font-semibold text-brass hover:underline"
+            >
+              <Icon name="pin" size={12} /> Open in Google Maps
+            </a>
           </div>
 
           <div>
