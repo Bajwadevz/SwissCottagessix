@@ -9,7 +9,12 @@ export type PricingResult = {
   discountPerNight: number;
   totalDiscount: number;
   savingsPct: number;
+  /** 10 % advance reservation fee required to secure the booking */
+  advanceFee: number;
 };
+
+/** Advance booking fee as a fraction of totalPrice */
+export const ADVANCE_FEE_PCT = 0.10;
 
 /** Base nightly list rate before direct-booking discount */
 const LIST_PRICE = 40_000;
@@ -50,6 +55,7 @@ export function calculatePricing(guests: number, nights: number): PricingResult 
     discountPerNight: LIST_PRICE - pricePerNight,
     totalDiscount,
     savingsPct: Math.round((totalDiscount / totalListPrice) * 100),
+    advanceFee: Math.round(totalPrice * ADVANCE_FEE_PCT),
   };
 }
 

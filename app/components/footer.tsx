@@ -100,13 +100,16 @@ export function Footer() {
             </p>
             <div className="flex gap-2.5">
               {[
-                { i: "instagram" as const, l: "@swisscottagessix" },
-                { i: "whatsapp" as const, l: "WhatsApp" },
-                { i: "mail" as const, l: "Email" },
+                { i: "instagram" as const, l: "Instagram", href: "https://www.instagram.com/swisscottagesix/" },
+                { i: "whatsapp" as const, l: "WhatsApp", href: "https://wa.me/923190514569?text=Hi%2C%20I%27d%20like%20to%20book%20Swiss%20Cottages%20Six." },
+                { i: "mail" as const, l: "Email", href: "mailto:info@swisscottages.pk" },
               ].map((s) => (
                 <a
                   key={s.l}
-                  href="#"
+                  href={s.href}
+                  target={s.l !== "Email" ? "_blank" : undefined}
+                  rel={s.l !== "Email" ? "noopener noreferrer" : undefined}
+                  aria-label={s.l}
                   className="grid size-[38px] place-items-center rounded-full border border-line-2 text-ink-mute transition-colors hover:border-brass hover:text-brass"
                 >
                   <Icon name={s.i} size={15} />

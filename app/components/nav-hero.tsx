@@ -423,9 +423,9 @@ export function Hero() {
               }
             />
             <div className="pl-0 pt-2 md:pl-[18px] md:pt-0">
-              <button type="button" className="btn btn-primary px-6 py-3.5">
+              <a href="#booking" className="btn btn-primary px-6 py-3.5">
                 Check rates <Icon name="arrow" size={14} />
-              </button>
+              </a>
             </div>
           </div>
         </div>

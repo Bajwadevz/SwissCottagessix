@@ -21,7 +21,7 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
           "Luxury private cottages near PC Bhurban, Murree Hills — exclusive gated estate at 6,800 ft with panoramic Kashmir peak views, 24/7 security, and direct booking.",
         url,
         telephone: "+92-319-0514569",
-        priceRange: "PKR 28,000 – PKR 38,000 per night",
+        priceRange: "PKR 28,000 – PKR 40,000 per night",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Off PC Bhurban Road",
@@ -41,8 +41,8 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
           ratingValue: 9.2,
           bestRating: 10,
           worstRating: 1,
-          ratingCount: 86,
-          reviewCount: 86,
+          ratingCount: 384,
+          reviewCount: 384,
         },
         makesOffer: {
           "@type": "Offer",
@@ -72,6 +72,69 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
             },
           ],
         },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}/#faq`,
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "How far is Swiss Cottages Six from PC Bhurban?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Swiss Cottages Six is approximately 2 minutes' drive from Pearl Continental Bhurban, located off PC Bhurban Road in Bhurban, Murree Hills at an elevation of 6,800 ft.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How many guests can stay at Swiss Cottages Six?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The cottage accommodates up to 8 guests across 3 bedrooms and 2 bathrooms. It is ideal for families and private group retreats.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is the nightly rate for Swiss Cottages Six?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Direct booking rates start from PKR 28,000 per night for 1–4 guests, PKR 32,000 for 5–6 guests, and PKR 38,000 for 7–8 guests. The list price is PKR 40,000/night — booking directly saves up to 30%.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is an advance booking fee required?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. A 10% non-refundable advance reservation fee is required to secure your dates. The remaining balance is payable at check-in.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What amenities are included?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The cottage includes high-speed WiFi, Netflix, 24/7 hot water, climate control, private parking for 2 vehicles, breakfast for up to 4 guests, Interwood furnished interiors, 24/7 gated security, and panoramic views of the Pir Panjal range.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Can I book directly without using Airbnb or Booking.com?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Direct bookings are encouraged — you avoid all platform fees and receive the best available rate. Contact us via WhatsApp at +92 319 0514569 or use the booking calendar on our website.",
+            },
+          },
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}/#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: url },
+          { "@type": "ListItem", position: 2, name: "Cottages", item: `${url}/#cottages` },
+          { "@type": "ListItem", position: 3, name: "Book", item: `${url}/#booking` },
+        ],
       },
       {
         "@type": "VacationRental",

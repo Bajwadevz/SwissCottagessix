@@ -55,7 +55,7 @@ export function LeadForm() {
         <span className="eyebrow text-brass">Direct inquiry</span>
         <h3 className="display mt-2 text-2xl text-ink">We reply within minutes.</h3>
         <p className="mt-2 text-sm text-ink-mute">
-          Stored in our database when configured, and forwarded to n8n for WhatsApp follow-up.
+          Skip the platforms. Send us your dates and guest count — our host will personally confirm availability and rates over WhatsApp.
         </p>
       </div>
       <label className="flex flex-col gap-1 text-sm">

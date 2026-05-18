@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s · Swiss Cottages Six",
   },
   description:
-    "Luxury private cottages near PC Bhurban, Murree Hills — 5 min from Pearl Continental Bhurban. Exclusive gated estate at 6,800 ft with Kashmir peak views, 24/7 security, and direct booking. Ideal for families up to 8 guests.",
+    "Luxury private cottage near PC Bhurban, Murree Hills — 2 minutes from Pearl Continental Bhurban. Exclusive gated estate at 6,800 ft with panoramic Kashmir peak views, 24/7 security, and direct booking from PKR 28,000/night. Ideal for families up to 8 guests.",
   keywords: [
     "Luxury Cottage Bhurban",
     "Family Villa Murree",
@@ -58,13 +58,22 @@ export const metadata: Metadata = {
     siteName: "Swiss Cottages Six",
     title: "Swiss Cottages Six — Luxury Cottage Bhurban, Murree Hills",
     description:
-      "Luxury private cottages near PC Bhurban, Murree. 3 bedrooms, up to 8 guests, gated estate at 6,800 ft. Direct booking — no platform fees.",
+      "Luxury private cottage near PC Bhurban, Murree. 3 bedrooms, up to 8 guests, gated estate at 6,800 ft. Direct booking from PKR 28,000/night — no platform fees.",
+    images: [
+      {
+        url: `${site}/cottage/aerial.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Swiss Cottages Six — aerial view of the gated estate, Bhurban, Murree Hills",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Swiss Cottages Six — Luxury Cottage Bhurban, Murree",
     description:
-      "Private luxury cottages near PC Bhurban, Murree Hills. Up to 8 guests. Direct rates, no platform fees.",
+      "Private luxury cottage near PC Bhurban, Murree Hills. Up to 8 guests. Direct rates from PKR 28,000/night, no platform fees.",
+    images: [`${site}/cottage/aerial.jpg`],
   },
   alternates: { canonical: site },
   robots: { index: true, follow: true },

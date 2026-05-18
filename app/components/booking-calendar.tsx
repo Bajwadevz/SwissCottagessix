@@ -52,23 +52,36 @@ function PricingCard({
         </div>
         {p.breakfastExtra > 0 && (
           <div className="flex justify-between text-ink-mute">
-            <span>Breakfast for {p.guests - 4} extra guest{p.guests - 4 !== 1 ? "s" : ""}</span>
+            <span>Breakfast · {p.guests - 4} extra guest{p.guests - 4 !== 1 ? "s" : ""}</span>
             <span className="text-ink">{formatPKR(p.breakfastExtra)}</span>
           </div>
         )}
-        <div className="flex justify-between text-ink-mute line-through">
+        <div className="flex justify-between text-ink-mute line-through opacity-60">
           <span>List price ({formatPKR(p.listPrice)}/night)</span>
           <span>{formatPKR(p.totalListPrice)}</span>
         </div>
         <div className="border-t border-line pt-2 flex justify-between font-semibold text-ink">
-          <span>Total</span>
+          <span>Total (direct rate)</span>
           <span>{formatPKR(p.totalPrice)}</span>
         </div>
+
+        {/* Advance reservation fee */}
+        <div className="rounded-md border border-brass/30 bg-brass/[0.08] px-3 py-2.5 space-y-0.5">
+          <div className="flex justify-between text-[12px] font-semibold text-brass">
+            <span>Advance reservation fee (10%)</span>
+            <span>{formatPKR(p.advanceFee)}</span>
+          </div>
+          <p className="text-[11px] text-ink-dim leading-snug">
+            Due now to secure your dates. Remaining balance payable at check-in.
+          </p>
+        </div>
+
         <div className="flex items-center gap-2 rounded-md border border-pine/30 bg-pine/10 px-3 py-2 text-pine text-[12px]">
           <Icon name="check" size={13} />
           You save {formatPKR(p.totalDiscount)} ({p.savingsPct}% off list price)
         </div>
       </div>
+
       <button
         type="button"
         onClick={onBook}
@@ -76,6 +89,13 @@ function PricingCard({
       >
         Reserve via WhatsApp <Icon name="whatsapp" size={15} />
       </button>
+
+      {/* Legal small print */}
+      <p className="mt-2.5 text-center text-[10px] leading-snug text-ink-dim">
+        Advance booking fee of {formatPKR(p.advanceFee)} is{" "}
+        <strong className="font-semibold text-ink-mute">non-refundable</strong>. Full stay amount
+        due at check-in. Direct booking — no platform fee.
+      </p>
     </div>
   );
 }
@@ -268,10 +288,19 @@ export function BookingCalendar() {
 
   const showPricing = !overflow && range?.from && range?.to && nights > 0;
 
+  const pricing = range?.from && range?.to && nights > 0
+    ? calculatePricing(guests, nights)
+    : null;
+
   const waNumber = "923190514569";
-  const waMessage = range?.from && range?.to
+  const waMessage = range?.from && range?.to && pricing
     ? encodeURIComponent(
-        `Hi, I'd like to book Cottage Six from ${fmt(range.from)} to ${fmt(range.to)} for ${guests} guest${guests !== 1 ? "s" : ""}.`
+        `Hi, I'd like to reserve Cottage Six.\n\n` +
+        `Dates: ${fmt(range.from)} – ${fmt(range.to)}\n` +
+        `Guests: ${guests}\n` +
+        `Total: ${formatPKR(pricing.totalPrice)}\n` +
+        `Advance fee (10%): ${formatPKR(pricing.advanceFee)}\n\n` +
+        `Please confirm availability and share payment details.`
       )
     : "";
 
