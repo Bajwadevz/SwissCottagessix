@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 import type { ReviewCard } from "@/lib/reviews-fallback";
 import { FALLBACK_REVIEWS } from "@/lib/reviews-fallback";
@@ -260,15 +261,21 @@ export function SocialProof() {
               </div>
               
               <div className="mt-5 grid grid-cols-3 gap-2">
-                <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/aerial.jpg" alt="Aerial view of Swiss Cottages Six gated estate" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
-                <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/lounge.jpg" alt="Spacious sun-drenched living room lounge" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
-                <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/bedroom-view.jpg" alt="Master suite with pine-timber ceiling and mountain view" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
+                {[
+                  { src: "/cottage/aerial.jpg", alt: "Aerial view of Swiss Cottages Six gated estate" },
+                  { src: "/cottage/lounge.jpg", alt: "Spacious sun-drenched living room" },
+                  { src: "/cottage/bedroom-view.jpg", alt: "Master suite with pine-timber ceiling" },
+                ].map((img) => (
+                  <div key={img.src} className="relative aspect-square overflow-hidden rounded bg-line">
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="80px"
+                      className="object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className="mt-8 flex items-center gap-2 text-[13px] font-semibold text-[#E1306C] transition-transform duration-300 group-hover:translate-x-1">

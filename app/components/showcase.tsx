@@ -8,14 +8,12 @@ import { Icon } from "@/lib/icon";
 
 function ShowcaseImg({
   label,
-  tag,
   ratio = "4 / 3",
   children,
   accent,
   imgSrc,
 }: {
   label: string;
-  tag: string;
   ratio?: string;
   children?: React.ReactNode;
   accent?: string;
@@ -186,7 +184,7 @@ export function Showcase() {
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/bedroom-view.jpg" label="SIGNATURE_SUITE — vaulted pine ceiling, mountain view" tag="Floor 2" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/bedroom-view.jpg" label="SIGNATURE_SUITE — vaulted pine ceiling, mountain view" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -200,7 +198,7 @@ export function Showcase() {
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/kitchen.jpg" label="KITCHEN — walnut cabinetry, Esquire oven, gas hob" tag="Ground" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/kitchen.jpg" label="KITCHEN — walnut cabinetry, Esquire oven, gas hob" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -214,7 +212,7 @@ export function Showcase() {
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/lounge.jpg" label="LOUNGE — spacious sun-drenched living room" tag="Ground" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/lounge.jpg" label="LOUNGE — spacious sun-drenched living room" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -228,7 +226,7 @@ export function Showcase() {
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/exterior-night.jpg" label="ESTATE — cobblestone lane at night, lanterns" tag="Exterior" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/exterior-night.jpg" label="ESTATE — cobblestone lane at night, lanterns" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -242,7 +240,7 @@ export function Showcase() {
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/bathroom.jpg" label="BATHROOM — stone tiles, glass shower, vanity" tag="En-suite" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/bathroom.jpg" label="BATHROOM — stone tiles, glass shower, vanity" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -256,7 +254,7 @@ export function Showcase() {
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/master-suite.jpg" label="MASTER_SUITE — pine ceiling, A-frame master bedroom" tag="Floor 2" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/master-suite.jpg" label="MASTER_SUITE — pine ceiling, A-frame master bedroom" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -270,7 +268,7 @@ export function Showcase() {
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/study.jpg" label="STUDY — pine forest mountain view study nook" tag="Floor 2" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/study.jpg" label="STUDY — pine forest mountain view study nook" ratio="auto" />
             </HoverCard>
           </div>
         </div>
