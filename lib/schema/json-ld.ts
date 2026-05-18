@@ -21,7 +21,7 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
           "Luxury private cottages near PC Bhurban, Murree Hills — exclusive gated estate at 6,800 ft with panoramic Kashmir peak views, 24/7 security, and direct booking.",
         url,
         telephone: "+92-319-0514569",
-        priceRange: "PKR 28,000 – PKR 40,000 per night",
+        priceRange: "PKR 28,000 – PKR 45,000 per night",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Off PC Bhurban Road",
@@ -69,6 +69,7 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
               price: 38000,
               priceCurrency: "PKR",
               unitText: "NIGHT",
+              description: "Weekday rate; weekend rate PKR 45,000",
             },
           ],
         },
@@ -98,7 +99,7 @@ export function buildLodgingJsonLd(siteUrl: string): JsonLdGraph {
             name: "What is the nightly rate for Swiss Cottages Six?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Direct booking rates start from PKR 28,000 per night for 1–4 guests, PKR 32,000 for 5–6 guests, and PKR 38,000 for 7–8 guests. The list price is PKR 40,000/night — booking directly saves up to 30%.",
+              text: "Direct booking rates start from PKR 28,000 per night for 1–4 guests, PKR 32,000 for 5–6 guests, and PKR 38,000 (weekday) / PKR 45,000 (weekend) for 7–8 guests. The list price is PKR 45,000/night — booking directly saves up to 30%.",
             },
           },
           {

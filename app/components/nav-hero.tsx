@@ -128,193 +128,16 @@ export function Hero() {
 
   return (
     <section id="top" className="relative min-h-screen overflow-hidden">
-      <motion.div className="absolute inset-0 z-0 bg-bg overflow-hidden" style={{ y }}>
-        <svg
-          viewBox="0 0 1200 800"
-          preserveAspectRatio="xMidYMax slice"
-          className="absolute inset-0 h-full w-full"
-        >
-          <defs>
-            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--bg)" />
-              <stop offset="65%" stopColor="var(--bg-2)" />
-              <stop offset="100%" stopColor="var(--surface)" stopOpacity="0.5" />
-            </linearGradient>
-            <linearGradient id="fogGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--bg)" stopOpacity="0" />
-              <stop offset="100%" stopColor="var(--bg)" stopOpacity="1" />
-            </linearGradient>
-            <linearGradient id="midFog" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--bg)" stopOpacity="0" />
-              <stop offset="100%" stopColor="var(--bg)" stopOpacity="0.45" />
-            </linearGradient>
-          </defs>
-
-          <rect width="100%" height="100%" fill="url(#skyGrad)" />
-
-          {/* Distant ghost peaks — barely visible, high elevation */}
-          <motion.g style={{ y: useTransform(scrollY, [0, 1000], [0, 160]) }}>
-            <path
-              d="M0,500 L100,360 L260,440 L460,210 L660,360 L840,255 L1020,330 L1200,270 L1200,800 L0,800 Z"
-              fill="var(--surface)"
-              opacity="0.12"
-            />
-          </motion.g>
-
-          {/* Far mountains — primary ridge */}
-          <motion.g style={{ y: useTransform(scrollY, [0, 1000], [0, 110]) }}>
-            <path
-              d="M0,570 L160,410 L320,500 L560,265 L800,440 L1020,330 L1200,395 L1200,800 L0,800 Z"
-              fill="var(--surface)"
-              opacity="0.28"
-              stroke="var(--brass)"
-              strokeWidth="0.6"
-              strokeOpacity="0.09"
-            />
-          </motion.g>
-
-          {/* Mid mountains — secondary ridge, slightly warmer */}
-          <motion.g style={{ y: useTransform(scrollY, [0, 1000], [0, 65]) }}>
-            <path
-              d="M-80,650 L120,490 L360,590 L640,415 L880,530 L1100,440 L1300,510 L1300,800 L-80,800 Z"
-              fill="var(--surface-2)"
-              opacity="0.48"
-              stroke="var(--brass)"
-              strokeWidth="0.5"
-              strokeOpacity="0.13"
-            />
-          </motion.g>
-
-          {/* Near foothills — rolling hills closer */}
-          <motion.g style={{ y: useTransform(scrollY, [0, 1000], [0, 35]) }}>
-            <path
-              d="M-60,710 L80,590 L240,660 L460,555 L680,635 L920,565 L1100,610 L1300,575 L1300,800 L-60,800 Z"
-              fill="var(--surface)"
-              opacity="0.62"
-            />
-          </motion.g>
-
-          {/* Pine treeline silhouette */}
-          <motion.g style={{ y: useTransform(scrollY, [0, 1000], [0, 18]) }}>
-            <path
-              d="M-20,800 L-20,748 L0,702 L20,748 L38,694 L58,748 L76,682 L96,748 L116,688 L136,748 L156,672 L176,748 L198,696 L218,748 L238,676 L258,748 L278,682 L300,748 L320,668 L342,748 L362,686 L382,748 L402,678 L424,748 L444,663 L466,748 L486,682 L508,748 L528,670 L550,748 L570,686 L592,748 L612,666 L634,748 L654,682 L676,748 L696,672 L718,748 L738,660 L760,748 L780,678 L802,748 L822,670 L844,748 L864,684 L886,748 L906,666 L928,748 L948,678 L970,748 L990,663 L1012,748 L1032,682 L1054,748 L1074,670 L1096,748 L1116,666 L1138,748 L1158,682 L1180,748 L1200,668 L1222,748 L1222,800 Z"
-              fill="var(--pine)"
-              opacity="0.22"
-            />
-          </motion.g>
-
-          {/* Primary cloud bank — drifts left on scroll */}
-          <motion.g style={{ x: useTransform(scrollY, [0, 1000], [0, -80]) }}>
-            <ellipse cx="155" cy="345" rx="95" ry="30" fill="var(--ink)" opacity="0.038" />
-            <ellipse cx="125" cy="354" rx="62" ry="21" fill="var(--ink)" opacity="0.028" />
-            <ellipse cx="200" cy="350" rx="52" ry="18" fill="var(--ink)" opacity="0.022" />
-            <ellipse cx="755" cy="268" rx="105" ry="32" fill="var(--ink)" opacity="0.032" />
-            <ellipse cx="722" cy="277" rx="68" ry="22" fill="var(--ink)" opacity="0.026" />
-            <ellipse cx="808" cy="273" rx="58" ry="19" fill="var(--ink)" opacity="0.018" />
-            <ellipse cx="1055" cy="385" rx="82" ry="25" fill="var(--ink)" opacity="0.028" />
-            <ellipse cx="1022" cy="392" rx="52" ry="17" fill="var(--ink)" opacity="0.022" />
-          </motion.g>
-
-          {/* Secondary cloud layer — slower drift */}
-          <motion.g style={{ x: useTransform(scrollY, [0, 1000], [0, -38]) }}>
-            <ellipse cx="355" cy="302" rx="72" ry="22" fill="var(--ink)" opacity="0.022" />
-            <ellipse cx="605" cy="382" rx="88" ry="26" fill="var(--ink)" opacity="0.018" />
-            <ellipse cx="908" cy="318" rx="64" ry="19" fill="var(--ink)" opacity="0.018" />
-          </motion.g>
-
-          {/* Foreground — ground, glow, cabin, trees */}
-          <motion.g style={{ y: useTransform(scrollY, [0, 1000], [0, 22]) }}>
-            <path d="M0,800 Q200,668 600,728 T1200,698 L1200,800 Z" fill="var(--surface)" opacity="0.55" />
-
-            {/* Warm ambient glow — lantern / moon */}
-            <circle cx="600" cy="562" r="130" fill="var(--brass)" opacity="0.055" />
-            <circle cx="600" cy="562" r="220" fill="var(--brass)" opacity="0.022" />
-
-            {/* A-frame cabin & pine grove */}
-            <g stroke="var(--brass)" fill="none" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" transform="translate(600, 645) scale(1.2)">
-              {/* Ground datum lines */}
-              <line x1="-145" y1="70" x2="-88" y2="70" opacity="0.45" />
-              <line x1="88" y1="70" x2="135" y2="70" opacity="0.45" />
-
-              {/* Main A-frame structure */}
-              <line x1="0" y1="-94" x2="76" y2="70" />
-              <line x1="-26" y1="-94" x2="-98" y2="70" />
-              <line x1="0" y1="-94" x2="-60" y2="70" />
-
-              {/* Right roof shingle marks */}
-              <line x1="15" y1="-60" x2="21" y2="-60" />
-              <line x1="30" y1="-26" x2="36" y2="-26" />
-              <line x1="45" y1="8" x2="51" y2="8" />
-              <line x1="60" y1="42" x2="66" y2="42" />
-
-              {/* Left roof horizontal slats */}
-              <line x1="-13" y1="-63" x2="-32" y2="-63" />
-              <line x1="-25" y1="-31" x2="-50" y2="-31" />
-              <line x1="-37" y1="1" x2="-68" y2="1" />
-              <line x1="-48" y1="33" x2="-84" y2="33" />
-              <line x1="-59" y1="62" x2="-97" y2="62" />
-
-              {/* Ridge cap */}
-              <line x1="-26" y1="-94" x2="0" y2="-94" />
-
-              {/* Chimney */}
-              <rect x="18" y="-114" width="9" height="24" rx="1.5" />
-              <line x1="16" y1="-114" x2="29" y2="-114" />
-
-              {/* Arched front door */}
-              <path d="M-14,70 V38 A14,14 0 0,1 14,38 V70" />
-              <circle cx="7" cy="56" r="2" fill="var(--brass)" />
-
-              {/* Centre window */}
-              <rect x="-3" y="5" width="6" height="15" rx="1.5" />
-
-              {/* Porch step */}
-              <line x1="-20" y1="70" x2="20" y2="70" />
-
-              {/* Pine trees */}
-              <g strokeWidth="1.25">
-                {/* Left tall pine */}
-                <g transform="translate(-155, 70)">
-                  <line x1="0" y1="0" x2="0" y2="-106" />
-                  <path d="M-12,-93 L0,-106 L12,-93 M-12,-77 L0,-90 L12,-77 M-13,-61 L0,-74 L13,-61 M-14,-45 L0,-58 L14,-45 M-14,-29 L0,-42 L14,-29 M-13,-13 L0,-26 L13,-13" />
-                </g>
-
-                {/* Left short pine */}
-                <g transform="translate(-120, 70)">
-                  <line x1="0" y1="0" x2="0" y2="-80" />
-                  <path d="M-10,-68 L0,-80 L10,-68 M-10,-53 L0,-65 L10,-53 M-11,-38 L0,-50 L11,-38 M-11,-23 L0,-35 L11,-23 M-10,-8 L0,-20 L10,-8" />
-                </g>
-
-                {/* Right tall pine */}
-                <g transform="translate(116, 70)">
-                  <line x1="0" y1="0" x2="0" y2="-106" />
-                  <path d="M-12,-93 L0,-106 L12,-93 M-12,-77 L0,-90 L12,-77 M-13,-61 L0,-74 L13,-61 M-14,-45 L0,-58 L14,-45 M-14,-29 L0,-42 L14,-29 M-13,-13 L0,-26 L13,-13" />
-                </g>
-
-                {/* Right small pine */}
-                <g transform="translate(143, 70)">
-                  <line x1="0" y1="0" x2="0" y2="-64" />
-                  <path d="M-8,-53 L0,-64 L8,-53 M-9,-39 L0,-50 L9,-39 M-9,-25 L0,-36 L9,-25 M-8,-11 L0,-22 L8,-11" />
-                </g>
-              </g>
-            </g>
-          </motion.g>
-
-          {/* Mid-ground mist layer */}
-          <rect x="0" y="555" width="100%" height="245" fill="url(#midFog)" opacity="0.65" />
-
-          {/* Bottom fade to bg */}
-          <rect x="0" y="640" width="100%" height="160" fill="url(#fogGrad)" opacity="1" />
-        </svg>
-
-        <div
-          className="absolute inset-0 mix-blend-overlay opacity-[0.08] pointer-events-none"
-          style={{
-            backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.5'/></svg>\")"
-          }}
+      <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y }}>
+        <img
+          src="/cottage/aerial.jpg"
+          alt="Swiss Cottages Six gated estate aerial view, Bhurban Murree Hills"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg" />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,9,7,0.55)] via-[rgba(10,9,7,0.35)] to-[rgba(10,9,7,0.90)]" />
+        {/* Left vignette */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(10,9,7,0.4)] via-transparent to-transparent" />
       </motion.div>
 
       <div className="container relative z-[2] pb-[340px] pt-[22vh] md:pb-[200px]">
@@ -325,14 +148,14 @@ export function Hero() {
           className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-pill border border-glass-bd bg-glass-bg px-3.5 py-2 backdrop-blur-md"
         >
           <span className="size-1.5 rounded-full bg-brass" />
-          <span className="eyebrow text-ink">Bhurban, Murree Hills · Private Gated Estate · 2 min from PC Bhurban · 6,800 ft</span>
+          <span className="eyebrow text-white/80">Bhurban, Murree Hills · Private Gated Estate · 2 min from PC Bhurban · 6,800 ft</span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-          className="display mt-7 max-w-[1100px] text-[clamp(56px,8.5vw,124px)] leading-none text-ink"
+          className="display mt-7 max-w-[1100px] text-[clamp(56px,8.5vw,124px)] leading-none text-white"
         >
           Exclusivity
           <br />
@@ -343,7 +166,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.22, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 max-w-[640px] text-[19px] text-ink-mute leading-relaxed"
+          className="mt-6 max-w-[640px] text-[19px] text-white/70 leading-relaxed"
         >
           An exclusive gated sanctuary at 6,800 ft in the Murree Hills — twelve private residences where alpine solitude meets the timeless grandeur of Kashmir&apos;s mist-draped peaks.
         </motion.p>
@@ -358,8 +181,8 @@ export function Hero() {
             Check availability <Icon name="arrow" size={14} />
           </a>
           <a
-            href="#gallery"
-            className="btn btn-ghost border-line-2 text-ink hover:bg-line-2"
+            href="#cottages"
+            className="btn btn-ghost border border-white/25 text-white hover:bg-white/10"
           >
             <Icon name="play" size={12} /> Explore the estate
           </a>
@@ -376,11 +199,11 @@ export function Hero() {
             { label: "Repeat guests", value: "95%", sub: "they never want to leave" },
             { label: "Booked nights", value: "92%", sub: "summer 2025" },
           ].map((s) => (
-            <div key={s.label} className="border-l border-line-2 pl-4">
-              <div className="eyebrow text-ink-mute">{s.label}</div>
-              <div className="display text-[32px] text-ink">
+            <div key={s.label} className="border-l border-white/20 pl-4">
+              <div className="eyebrow text-white/50">{s.label}</div>
+              <div className="display text-[32px] text-white">
                 {s.value}{" "}
-                <span className="font-sans text-[13px] font-normal text-ink-dim">{s.sub}</span>
+                <span className="font-sans text-[13px] font-normal text-white/40">{s.sub}</span>
               </div>
             </div>
           ))}

@@ -186,8 +186,6 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="Signature Suite · Floor 2"
                   title="Wake Up to the Mountains"
-                  sub="Vaulted pine-timber ceiling, panoramic mountain window, floral linen — Murree pine forest framed at sunrise."
-                  meta={["Mountain View", "Pine Ceiling", "Private Balcony"]}
                 />
               }
             >
@@ -202,8 +200,6 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="Chef's Kitchen · Ground Floor"
                   title="Fully Equipped Modular Kitchen"
-                  sub="Walnut cabinetry, Esquire built-in oven & microwave, 5-burner gas hob, extraction hood, and breakfast bar stool."
-                  meta={["Built-in Oven", "Gas Hob", "Extractor Hood"]}
                 />
               }
             >
@@ -218,8 +214,6 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="Entertainment Lounge · Ground Floor"
                   title="Tufted Velvet TV Wall"
-                  sub="Bespoke tufted velvet feature wall, TCL smart TV, walnut media console with board games — evenings well spent."
-                  meta={["Smart TV", "Netflix", "Board Games"]}
                 />
               }
             >
@@ -234,7 +228,6 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="The Estate · Night"
                   title="Lantern-Lit Cobblestone Lane"
-                  sub="Private cobblestone street, warm amber lanterns, A-frame rooflines — the silence of 6,800 ft after dark."
                 />
               }
             >
@@ -249,7 +242,6 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="Master Bathroom · En-Suite"
                   title="Stone-Tile Wet Room"
-                  sub="Full-height stone tiles, glass shower screen, backlit vanity mirror, and 24/7 hot water at 6,800 ft."
                 />
               }
             >
@@ -264,8 +256,6 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="Upper Suite · Floor 2"
                   title="A-Frame Twin Retreat"
-                  sub="Soaring pine-timber ceiling with a nautical mural backdrop — light-filled, spacious, and quietly private."
-                  meta={["Pine Ceiling", "Twin Beds", "Floor 2"]}
                 />
               }
             >
@@ -280,7 +270,6 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="Reading Nook · Floor 2"
                   title="Quiet A-Frame Sitting Corner"
-                  sub="Wingback armchairs, curated artwork, warm wall sconce — a private retreat beneath the apex of the pine ceiling."
                 />
               }
             >

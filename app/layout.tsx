@@ -32,11 +32,11 @@ const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://swisscottagessix.com";
 export const metadata: Metadata = {
   metadataBase: new URL(site),
   title: {
-    default: "Swiss Cottages Six — Luxury cottage Bhurban · Gated community Murree",
+    default: "Swiss Cottages Six — Luxury Cottage Bhurban Murree | Private Villa near PC Hotel",
     template: "%s · Swiss Cottages Six",
   },
   description:
-    "Luxury private cottage near PC Bhurban, Murree Hills — 2 minutes from Pearl Continental Bhurban. Exclusive gated estate at 6,800 ft with panoramic Kashmir peak views, 24/7 security, and direct booking from PKR 28,000/night. Ideal for families up to 8 guests.",
+    "Book a private luxury cottage in Bhurban, Murree Hills — 2 minutes from PC Bhurban. Exclusive gated estate at 6,800 ft. 3 bedrooms, up to 8 guests. Direct booking PKR 28,000/night. No Airbnb fees. Family villas & weekend getaways near Islamabad.",
   keywords: [
     "Luxury Cottage Bhurban",
     "Family Villa Murree",
@@ -50,6 +50,18 @@ export const metadata: Metadata = {
     "Murree Hills vacation rental",
     "Bhurban vacation home",
     "luxury family accommodation Murree",
+    "cottage near PC Bhurban",
+    "weekend getaway Murree",
+    "family cottage Bhurban",
+    "luxury villa Murree Hills",
+    "Bhurban holiday cottage",
+    "Murree holiday home",
+    "cottage for rent near Islamabad",
+    "Swiss cottage Murree",
+    "gated community Bhurban",
+    "best cottage Bhurban",
+    "holiday rental Murree",
+    "PC Bhurban hotel alternative",
   ],
   openGraph: {
     type: "website",
@@ -80,7 +92,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#131210",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

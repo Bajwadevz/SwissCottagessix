@@ -31,10 +31,10 @@ const WEEKDAY_RATES: Record<string, number> = {
 const WEEKEND_RATES: Record<string, number> = {
   "1-4": 36_000,
   "5-6": 42_000,
-  "7-8": 49_000,
+  "7-8": 45_000,
 };
 
-const LIST_PRICE = 40_000;
+const LIST_PRICE = 45_000;
 export const ADVANCE_FEE_PCT = 0.10;
 
 function guestTier(g: number): string {
@@ -58,7 +58,8 @@ function multiNightDiscountPct(nights: number): number {
 }
 
 function buildUpsellMessage(nights: number): string | null {
-  if (nights === 2) return "Add 1 more night — 3+ nights unlocks 5% off";
+  if (nights === 1) return "Add 1 more night — save 5% on 3+ night stays";
+  if (nights === 2) return "Add 1 more night — unlock 5% off your entire stay";
   if (nights === 3) return "Add 1 more night — 4+ nights unlocks 7% off";
   if (nights === 4) return "Add 1 more night — 5+ nights unlocks 10% off";
   if (nights === 5 || nights === 6) {

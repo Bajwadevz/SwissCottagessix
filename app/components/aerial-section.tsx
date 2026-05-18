@@ -18,8 +18,8 @@ export function AerialSection() {
     >
       {/* Image */}
       <Image
-        src="/cottage/exterior-night.jpg"
-        alt="Swiss Cottages Six gated estate at night, cobblestone lane, Bhurban Murree"
+        src="/cottage/aerial.jpg"
+        alt="Swiss Cottages Six gated estate aerial view, Bhurban Murree Hills"
         fill
         priority={false}
         sizes="100vw"
