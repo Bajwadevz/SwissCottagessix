@@ -75,7 +75,7 @@ function HoverCard({
         style={{ opacity: hover ? 1 : 0.65 }}
       />
       <div
-        className="absolute bottom-[22px] left-[22px] right-[22px] text-ink transition-all duration-[460ms]"
+        className="absolute bottom-[36px] left-[22px] right-[22px] text-ink transition-all duration-[460ms]"
         style={{
           transform: hover ? "translateY(0)" : "translateY(12px)",
           opacity: hover ? 1 : 0.85,
@@ -251,8 +251,8 @@ export function Showcase() {
             <HoverCard
               reveal={
                 <RevealBody
-                  eyebrow="Pine-Ceiling Suite · Floor 2"
-                  title="A-Frame Master Suite"
+                  eyebrow="Sitting Lounge · Floor 2"
+                  title="A-Frame Vaulted Retreat"
                 />
               }
             >
