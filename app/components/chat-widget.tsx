@@ -259,6 +259,17 @@ export function ChatWidget() {
     return () => clearTimeout(timer);
   }, []);
 
+  // ── External trigger: any button can dispatch 'open-sasha' to open the chat ─
+  useEffect(() => {
+    const handler = () => {
+      setOpen(true);
+      setHasOpened(true);
+      sessionStorage.setItem("sc6_chat_seen", "1");
+    };
+    window.addEventListener("open-sasha", handler);
+    return () => window.removeEventListener("open-sasha", handler);
+  }, []);
+
   // ── Send message ───────────────────────────────────────────────────────────
   const sendMessage = useCallback(
     async (text: string) => {

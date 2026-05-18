@@ -1,6 +1,5 @@
 "use client";
 
-import { AerialSection } from "./aerial-section";
 import { BookingCalendar } from "./booking-calendar";
 import { DesignSystemPanel, Footer } from "./footer";
 import { GatedCommunity } from "./gated-community";
@@ -17,7 +16,6 @@ export function HomePage() {
         <Hero />
         <SocialProof />
         <GatedCommunity />
-        <AerialSection />
         <Showcase />
 
         {/* Booking + Inquiry */}

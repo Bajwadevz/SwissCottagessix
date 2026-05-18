@@ -112,9 +112,13 @@ export function Nav() {
           >
             <Icon name={theme === "dark" ? "sun" : "moon"} size={16} />
           </button>
-          <a href="#book" className="btn btn-primary py-2.5 pl-[18px] pr-[18px] text-[13px]">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-sasha"))}
+            className="btn btn-primary py-2.5 pl-[18px] pr-[18px] text-[13px]"
+          >
             Reserve <Icon name="arrow" size={14} />
-          </a>
+          </button>
         </div>
       </div>
     </nav>
@@ -354,9 +358,13 @@ export function Hero() {
           transition={{ delay: 0.35, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-wrap gap-3.5"
         >
-          <a href="#book" className="btn btn-primary">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-sasha"))}
+            className="btn btn-primary"
+          >
             Check availability <Icon name="arrow" size={14} />
-          </a>
+          </button>
           <a
             href="#gallery"
             className="btn btn-ghost border-line-2 text-ink hover:bg-line-2"
@@ -393,7 +401,7 @@ export function Hero() {
       >
         <div className="glass glass-strong p-[18px] md:p-[18px_22px]">
           <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-[1.2fr_1fr_1fr_1fr_auto] md:gap-0">
-            <BookingField label="Suite" icon="bed" value="Cottage 03 · Cedar" />
+            <BookingField label="Suite" icon="bed" value="Cottage Six · Bhurban" />
             <BookingField label="Arrive" icon="calendar" value="Fri · 12 Jun" divider />
             <BookingField label="Depart" icon="calendar" value="Mon · 15 Jun" divider />
             <BookingField
@@ -423,9 +431,13 @@ export function Hero() {
               }
             />
             <div className="pl-0 pt-2 md:pl-[18px] md:pt-0">
-              <a href="#booking" className="btn btn-primary px-6 py-3.5">
-                Check rates <Icon name="arrow" size={14} />
-              </a>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-sasha"))}
+                className="btn btn-primary px-6 py-3.5"
+              >
+                Check availability <Icon name="arrow" size={14} />
+              </button>
             </div>
           </div>
         </div>

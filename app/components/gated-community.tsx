@@ -2,8 +2,59 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 import { Icon } from "@/lib/icon";
+
+const AERIAL_STATS = [
+  { value: "4", unit: "Acres", label: "Private estate" },
+  { value: "6,800", unit: "ft", label: "Elevation" },
+  { value: "12", unit: "Cottages", label: "Gated community" },
+  { value: "2 min", unit: "", label: "From PC Bhurban" },
+];
+
+function AerialBanner() {
+  return (
+    <div className="relative mt-7 h-[220px] overflow-hidden rounded-lg border border-line md:h-[260px]">
+      <Image
+        src="/cottage/aerial.jpg"
+        alt="Swiss Cottages Six — bird's-eye aerial view of the gated estate"
+        fill
+        sizes="(max-width: 768px) 100vw, 80vw"
+        className="object-cover"
+        style={{ objectPosition: "center 45%", filter: "contrast(1.08) brightness(1.04) saturate(1.1)" }}
+      />
+      {/* Dark overlay for legibility */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(8,7,5,0.88)] via-[rgba(8,7,5,0.25)] to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[rgba(8,7,5,0.35)] via-transparent to-transparent" />
+
+      {/* GPS chip */}
+      <div className="absolute left-4 top-4">
+        <span className="inline-flex items-center gap-1.5 rounded-pill border border-white/15 bg-black/30 px-3 py-1 font-mono text-[10px] tracking-widest text-white/70 backdrop-blur-sm">
+          <span className="size-1.5 rounded-full bg-brass" />
+          33.9603° N, 73.4538° E
+        </span>
+      </div>
+
+      {/* Stats row */}
+      <div className="absolute bottom-0 left-0 right-0 px-4 pb-5">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {AERIAL_STATS.map((s) => (
+            <div key={s.label} className="rounded-lg border border-white/10 bg-black/40 px-4 py-3 backdrop-blur-sm">
+              <div className="font-display text-[22px] font-medium leading-none text-white">
+                {s.value}
+                {s.unit && (
+                  <span className="ml-1 font-sans text-[11px] font-normal text-white/55">{s.unit}</span>
+                )}
+              </div>
+              <div className="mt-1 font-mono text-[10px] uppercase tracking-wide text-white/45">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Counter12({
   to,
@@ -248,6 +299,8 @@ export function GatedCommunity() {
           </div>
         </div>
 
+        <AerialBanner />
+
         <div className="mt-5 flex flex-wrap items-center gap-6 rounded-lg border border-line bg-surface px-6 py-4">
           <div className="flex items-center gap-2.5 text-[13px] text-ink-mute">
             <Icon name="pin" size={15} className="text-brass shrink-0" />
@@ -272,9 +325,13 @@ export function GatedCommunity() {
               season — waitlist averages 11 weeks
             </span>
           </div>
-          <a href="#book" className="btn btn-primary py-3 pl-5 pr-5 text-[13px]">
-            Secure your dates <Icon name="arrow" size={14} />
-          </a>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-sasha"))}
+            className="btn btn-primary py-3 pl-5 pr-5 text-[13px]"
+          >
+            Check availability <Icon name="sparkle" size={14} />
+          </button>
         </div>
       </div>
     </section>
