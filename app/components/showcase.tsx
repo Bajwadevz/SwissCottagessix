@@ -26,17 +26,7 @@ function ShowcaseImg({
       style={{ aspectRatio: ratio }}
     >
       {imgSrc ? (
-        <>
-          {/* Dark Mode Version (Original) */}
-          <img src={imgSrc} alt={label} className="absolute inset-0 h-full w-full object-cover hidden dark:block" />
-          {/* Light Mode Version (Inverted + Green Accent) */}
-          <img 
-            src={imgSrc} 
-            alt={label} 
-            className="absolute inset-0 h-full w-full object-cover block dark:hidden" 
-            style={{ filter: "invert(1) hue-rotate(-180deg) saturate(1.8) brightness(0.95)" }} 
-          />
-        </>
+        <img src={imgSrc} alt={label} className="absolute inset-0 h-full w-full object-cover" />
       ) : accent ? (
         <div
           className="absolute inset-0"
