@@ -179,34 +179,34 @@ export function Showcase() {
           id="gallery"
           className="grid auto-rows-[220px] grid-cols-12 gap-3.5"
         >
-          {/* Night exterior — most dramatic, anchors the gallery */}
+          {/* Hero — A-frame bedroom with mountain view */}
           <div className="col-span-12 md:col-span-7 md:row-span-2">
             <HoverCard
               reveal={
                 <RevealBody
-                  eyebrow="The Estate · Night"
-                  title="Your Private Cobblestone Lane"
-                  sub="Warm lantern-lit streets, A-frame rooflines, and the silence of Murree at night."
-                  meta={["Gated", "24/7 Security", "Private Parking"]}
+                  eyebrow="Signature Suite · Floor 2"
+                  title="Wake Up to the Mountains"
+                  sub="Vaulted pine-timber ceiling, panoramic mountain window, floral linen — Murree pine forest framed at sunrise."
+                  meta={["Mountain View", "Pine Ceiling", "Private Balcony"]}
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/exterior-night.jpg" label="ESTATE — cobblestone lane at night" tag="Exterior" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/bedroom-view.jpg" label="SIGNATURE_SUITE — vaulted pine ceiling, mountain view" tag="Floor 2" ratio="auto" />
             </HoverCard>
           </div>
 
-          {/* Master bedroom */}
+          {/* Cottage exterior — daytime */}
           <div className="col-span-12 md:col-span-5 md:row-span-2">
             <HoverCard
               reveal={
                 <RevealBody
-                  eyebrow="Master Bedroom · Floor 2"
-                  title="Elegant Master Suite"
-                  sub="Damask wallpaper, tray ceiling with recessed lighting, and a solid wood king bed."
+                  eyebrow="The Cottage · Bhurban"
+                  title="Your Private A-Frame Retreat"
+                  sub="Stone-clad facade, wrought-iron balcony, floor-to-ceiling sliding windows opening to open sky."
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/bedroom-master.jpg" label="MASTER_BEDROOM — damask wallpaper, tray ceiling" tag="Floor 2" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/exterior-day.jpg" label="COTTAGE_EXTERIOR — stone facade, balcony, blue sky" tag="Exterior" ratio="auto" />
             </HoverCard>
           </div>
 
@@ -217,27 +217,72 @@ export function Showcase() {
                 <RevealBody
                   eyebrow="Chef's Kitchen"
                   title="Fully Equipped Modular Kitchen"
-                  sub="Walnut cabinetry, Esquire built-in oven, 5-burner gas hob, and a breakfast bar."
-                  meta={["Oven", "Hob", "Extractor Hood", "Dishware"]}
+                  sub="Walnut cabinetry, Esquire built-in oven, 5-burner gas hob, extraction hood, and breakfast bar."
+                  meta={["Built-in Oven", "Gas Hob", "Extractor Hood"]}
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/kitchen.jpg" label="KITCHEN — walnut cabinetry, built-in oven" tag="Ground" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/kitchen.jpg" label="KITCHEN — walnut cabinetry, built-in Esquire oven" tag="Ground" ratio="auto" />
             </HoverCard>
           </div>
 
-          {/* Lounge */}
+          {/* Upper suite */}
           <div className="col-span-12 md:col-span-6 md:row-span-2">
             <HoverCard
               reveal={
                 <RevealBody
-                  eyebrow="Living Area · Ground Floor"
-                  title="Curated Lounge & Entertainment"
-                  sub="Tufted velvet TV wall, flat-screen smart TV, board games, and handpicked décor."
+                  eyebrow="Upper Suite · Floor 2"
+                  title="Expansive A-Frame Lounge"
+                  sub="Soaring pine-timber ceiling, en-suite wardrobe, study corner, sitting area in mountain light."
                 />
               }
             >
-              <ShowcaseImg imgSrc="/cottage/lounge.jpg" label="LOUNGE — tufted velvet TV wall, smart TV" tag="Ground" ratio="auto" />
+              <ShowcaseImg imgSrc="/cottage/bedroom-upper.jpg" label="UPPER_SUITE — pine ceiling, wardrobe, study nook" tag="Floor 2" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* Night exterior */}
+          <div className="col-span-12 md:col-span-4 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="The Estate · Night"
+                  title="Lantern-Lit Cobblestone Lane"
+                  sub="Private street, warm amber lanterns, and the silence of 6,800 ft after dark."
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/exterior-night.jpg" label="ESTATE — cobblestone lane at night" tag="Exterior" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* Bathroom */}
+          <div className="col-span-12 md:col-span-4 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="Bathroom"
+                  title="Marble-Finish Wet Room"
+                  sub="Full-height stone tiles, glass shower, 24/7 hot water, backlit vanity mirror."
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/bathroom.jpg" label="BATHROOM — marble tiles, glass shower panel" tag="En-suite" ratio="auto" />
+            </HoverCard>
+          </div>
+
+          {/* Study nook */}
+          <div className="col-span-12 md:col-span-4 md:row-span-2">
+            <HoverCard
+              reveal={
+                <RevealBody
+                  eyebrow="Work &amp; Unwind"
+                  title="Quiet Study Corner"
+                  sub="Pine ceiling, mountain outlook, ambient floor lamp — connected to nature, never disconnected from life."
+                />
+              }
+            >
+              <ShowcaseImg imgSrc="/cottage/study.jpg" label="STUDY — pine ceiling, mountain view, desk" tag="Floor 2" ratio="auto" />
             </HoverCard>
           </div>
         </div>

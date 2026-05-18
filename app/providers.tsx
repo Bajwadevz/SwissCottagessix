@@ -21,10 +21,17 @@ export function useSiteTheme() {
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
+
+  // Restore saved theme on mount (no flash because SSR renders light)
+  useEffect(() => {
+    const saved = localStorage.getItem("sc-theme") as Theme | null;
+    if (saved === "dark" || saved === "light") setTheme(saved);
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("sc-theme", theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {

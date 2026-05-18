@@ -261,13 +261,13 @@ export function SocialProof() {
               
               <div className="mt-5 grid grid-cols-3 gap-2">
                 <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/exterior-night.jpg" alt="Swiss Cottages Six estate at night" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                  <img src="/cottage/bedroom-view.jpg" alt="A-frame bedroom with mountain view" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
                 <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/bedroom-master.jpg" alt="Master bedroom interior" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                  <img src="/cottage/exterior-day.jpg" alt="Swiss Cottages Six exterior facade" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
                 <div className="aspect-square overflow-hidden rounded bg-line">
-                  <img src="/cottage/kitchen.jpg" alt="Modular kitchen" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
+                  <img src="/cottage/exterior-night.jpg" alt="Estate cobblestone lane at night" className="h-full w-full object-cover opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
               </div>
             </div>

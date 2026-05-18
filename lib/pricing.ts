@@ -1,61 +1,130 @@
 export type PricingResult = {
   guests: number;
   nights: number;
-  pricePerNight: number;
+  weekdayNights: number;
+  weekendNights: number;
+  weekdayRate: number;
+  weekendRate: number;
+  weekdaySubtotal: number;
+  weekendSubtotal: number;
   breakfastExtra: number;
+  subtotalBeforeDiscount: number;
+  stayDiscountPct: number;
+  stayDiscount: number;
   totalPrice: number;
   listPrice: number;
   totalListPrice: number;
-  discountPerNight: number;
-  totalDiscount: number;
+  totalSavings: number;
   savingsPct: number;
-  /** 10 % advance reservation fee required to secure the booking */
   advanceFee: number;
+  upsellMessage: string | null;
 };
 
-/** Advance booking fee as a fraction of totalPrice */
+/** Weekday rates Mon–Thu + Sun (direct booking) */
+const WEEKDAY_RATES: Record<string, number> = {
+  "1-4": 28_000,
+  "5-6": 32_000,
+  "7-8": 38_000,
+};
+
+/** Weekend premium rates Fri + Sat (~28–29% above weekday) */
+const WEEKEND_RATES: Record<string, number> = {
+  "1-4": 36_000,
+  "5-6": 42_000,
+  "7-8": 49_000,
+};
+
+const LIST_PRICE = 40_000;
 export const ADVANCE_FEE_PCT = 0.10;
 
-/** Base nightly list rate before direct-booking discount */
-const LIST_PRICE = 40_000;
+function guestTier(g: number): string {
+  if (g <= 4) return "1-4";
+  if (g <= 6) return "5-6";
+  return "7-8";
+}
 
-/**
- * Strict tiered pricing for Swiss Cottages Six.
- *
- * Tiers (PKR / night):
- *   1–4 guests  → 28,000  (includes breakfast for 4)
- *   5–6 guests  → 32,000
- *   7–8 guests  → 38,000  (max capacity)
- *
- * Extra breakfast/amenities: +300 PKR × extra guests (beyond 4) × nights
- */
-export function calculatePricing(guests: number, nights: number): PricingResult {
+/** Friday (5) and Saturday (6) carry the weekend premium */
+export function isWeekendNight(date: Date): boolean {
+  const d = date.getDay();
+  return d === 5 || d === 6;
+}
+
+function multiNightDiscountPct(nights: number): number {
+  if (nights >= 7) return 15;
+  if (nights >= 5) return 10;
+  if (nights >= 4) return 7;
+  if (nights >= 3) return 5;
+  return 0;
+}
+
+function buildUpsellMessage(nights: number): string | null {
+  if (nights === 2) return "Add 1 more night — 3+ nights unlocks 5% off";
+  if (nights === 3) return "Add 1 more night — 4+ nights unlocks 7% off";
+  if (nights === 4) return "Add 1 more night — 5+ nights unlocks 10% off";
+  if (nights === 5 || nights === 6) {
+    const gap = 7 - nights;
+    return `Add ${gap} more night${gap > 1 ? "s" : ""} — 7 nights unlocks 15% off`;
+  }
+  return null;
+}
+
+export function calculatePricing(
+  guests: number,
+  nights: number,
+  checkIn?: Date,
+): PricingResult {
   const g = Math.min(8, Math.max(1, Math.round(guests)));
   const n = Math.max(1, Math.round(nights));
+  const tier = guestTier(g);
 
-  let pricePerNight: number;
-  if (g <= 4) pricePerNight = 28_000;
-  else if (g <= 6) pricePerNight = 32_000;
-  else pricePerNight = 38_000;
+  const weekdayRate = WEEKDAY_RATES[tier];
+  const weekendRate = WEEKEND_RATES[tier];
 
+  let weekdayNights = n;
+  let weekendNights = 0;
+
+  if (checkIn) {
+    weekdayNights = 0;
+    weekendNights = 0;
+    const cur = new Date(checkIn);
+    for (let i = 0; i < n; i++) {
+      if (isWeekendNight(cur)) weekendNights++;
+      else weekdayNights++;
+      cur.setDate(cur.getDate() + 1);
+    }
+  }
+
+  const weekdaySubtotal = weekdayRate * weekdayNights;
+  const weekendSubtotal = weekendRate * weekendNights;
   const extraGuests = Math.max(0, g - 4);
   const breakfastExtra = extraGuests * 300 * n;
-  const totalPrice = pricePerNight * n + breakfastExtra;
+  const subtotalBeforeDiscount = weekdaySubtotal + weekendSubtotal + breakfastExtra;
+  const stayDiscountPct = multiNightDiscountPct(n);
+  const stayDiscount = Math.round((subtotalBeforeDiscount * stayDiscountPct) / 100);
+  const totalPrice = subtotalBeforeDiscount - stayDiscount;
   const totalListPrice = LIST_PRICE * n;
-  const totalDiscount = totalListPrice - totalPrice;
+  const totalSavings = totalListPrice - totalPrice;
 
   return {
     guests: g,
     nights: n,
-    pricePerNight,
+    weekdayNights,
+    weekendNights,
+    weekdayRate,
+    weekendRate,
+    weekdaySubtotal,
+    weekendSubtotal,
     breakfastExtra,
+    subtotalBeforeDiscount,
+    stayDiscountPct,
+    stayDiscount,
     totalPrice,
     listPrice: LIST_PRICE,
     totalListPrice,
-    discountPerNight: LIST_PRICE - pricePerNight,
-    totalDiscount,
-    savingsPct: Math.round((totalDiscount / totalListPrice) * 100),
+    totalSavings,
+    savingsPct: Math.round((totalSavings / Math.max(1, totalListPrice)) * 100),
     advanceFee: Math.round(totalPrice * ADVANCE_FEE_PCT),
+    upsellMessage: buildUpsellMessage(n),
   };
 }
 

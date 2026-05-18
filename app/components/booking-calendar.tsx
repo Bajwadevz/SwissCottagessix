@@ -32,41 +32,68 @@ function rangeOverlapsBlocks(range: DateRange, blocks: Block[]): boolean {
 function PricingCard({
   guests,
   nights,
+  checkIn,
   onBook,
 }: {
   guests: number;
   nights: number;
+  checkIn: Date;
   onBook: () => void;
 }) {
-  const p = calculatePricing(guests, nights);
+  const p = calculatePricing(guests, nights, checkIn);
 
   return (
     <div className="mt-5 rounded-lg border border-brass/40 bg-brass/[0.06] p-5">
       <div className="eyebrow mb-3 text-brass">Price estimate · direct booking</div>
       <div className="space-y-2 text-[13px]">
-        <div className="flex justify-between text-ink-mute">
-          <span>
-            {formatPKR(p.pricePerNight)} × {p.nights} night{p.nights !== 1 ? "s" : ""}
-          </span>
-          <span className="text-ink">{formatPKR(p.pricePerNight * p.nights)}</span>
-        </div>
+        {/* Weekday nights */}
+        {p.weekdayNights > 0 && (
+          <div className="flex justify-between text-ink-mute">
+            <span>
+              {formatPKR(p.weekdayRate)} × {p.weekdayNights} weekday night{p.weekdayNights !== 1 ? "s" : ""}
+            </span>
+            <span className="text-ink">{formatPKR(p.weekdaySubtotal)}</span>
+          </div>
+        )}
+        {/* Weekend nights */}
+        {p.weekendNights > 0 && (
+          <div className="flex justify-between text-ink-mute">
+            <span className="flex items-center gap-1.5">
+              {formatPKR(p.weekendRate)} × {p.weekendNights} weekend night{p.weekendNights !== 1 ? "s" : ""}
+              <span className="rounded-full bg-brass/20 px-1.5 py-0.5 text-[10px] font-semibold text-brass">Fri/Sat</span>
+            </span>
+            <span className="text-ink">{formatPKR(p.weekendSubtotal)}</span>
+          </div>
+        )}
+        {/* Breakfast */}
         {p.breakfastExtra > 0 && (
           <div className="flex justify-between text-ink-mute">
             <span>Breakfast · {p.guests - 4} extra guest{p.guests - 4 !== 1 ? "s" : ""}</span>
             <span className="text-ink">{formatPKR(p.breakfastExtra)}</span>
           </div>
         )}
-        <div className="flex justify-between text-ink-mute line-through opacity-60">
+        {/* Multi-night discount */}
+        {p.stayDiscountPct > 0 && (
+          <div className="flex justify-between font-medium text-pine">
+            <span className="flex items-center gap-1.5">
+              <Icon name="check" size={12} />
+              {p.stayDiscountPct}% stay discount ({p.nights}+ nights)
+            </span>
+            <span>−{formatPKR(p.stayDiscount)}</span>
+          </div>
+        )}
+        {/* List price reference */}
+        <div className="flex justify-between text-[12px] text-ink-mute opacity-50 line-through">
           <span>List price ({formatPKR(p.listPrice)}/night)</span>
           <span>{formatPKR(p.totalListPrice)}</span>
         </div>
-        <div className="border-t border-line pt-2 flex justify-between font-semibold text-ink">
+        {/* Total */}
+        <div className="border-t border-line pt-2 flex justify-between text-[14px] font-semibold text-ink">
           <span>Total (direct rate)</span>
           <span>{formatPKR(p.totalPrice)}</span>
         </div>
-
-        {/* Advance reservation fee */}
-        <div className="rounded-md border border-brass/30 bg-brass/[0.08] px-3 py-2.5 space-y-0.5">
+        {/* Advance fee */}
+        <div className="rounded-md border border-brass/30 bg-brass/[0.07] px-3 py-2.5 space-y-0.5">
           <div className="flex justify-between text-[12px] font-semibold text-brass">
             <span>Advance reservation fee (10%)</span>
             <span>{formatPKR(p.advanceFee)}</span>
@@ -75,11 +102,20 @@ function PricingCard({
             Due now to secure your dates. Remaining balance payable at check-in.
           </p>
         </div>
-
-        <div className="flex items-center gap-2 rounded-md border border-pine/30 bg-pine/10 px-3 py-2 text-pine text-[12px]">
-          <Icon name="check" size={13} />
-          You save {formatPKR(p.totalDiscount)} ({p.savingsPct}% off list price)
-        </div>
+        {/* Savings badge */}
+        {p.totalSavings > 0 && (
+          <div className="flex items-center gap-2 rounded-md border border-pine/30 bg-pine/10 px-3 py-2 text-pine text-[12px]">
+            <Icon name="check" size={13} />
+            You save {formatPKR(p.totalSavings)} vs. list price
+          </div>
+        )}
+        {/* Upsell nudge */}
+        {p.upsellMessage && (
+          <div className="flex items-center gap-2 rounded-md border border-brass/20 bg-brass/[0.04] px-3 py-2 text-ink-mute text-[12px]">
+            <span className="text-brass text-[14px]">💡</span>
+            {p.upsellMessage}
+          </div>
+        )}
       </div>
 
       <button
@@ -90,7 +126,6 @@ function PricingCard({
         Reserve via WhatsApp <Icon name="whatsapp" size={15} />
       </button>
 
-      {/* Legal small print */}
       <p className="mt-2.5 text-center text-[10px] leading-snug text-ink-dim">
         Advance booking fee of {formatPKR(p.advanceFee)} is{" "}
         <strong className="font-semibold text-ink-mute">non-refundable</strong>. Full stay amount
@@ -289,7 +324,7 @@ export function BookingCalendar() {
   const showPricing = !overflow && range?.from && range?.to && nights > 0;
 
   const pricing = range?.from && range?.to && nights > 0
-    ? calculatePricing(guests, nights)
+    ? calculatePricing(guests, nights, range.from)
     : null;
 
   const waNumber = "923190514569";
@@ -358,6 +393,7 @@ export function BookingCalendar() {
         <PricingCard
           guests={guests}
           nights={nights}
+          checkIn={range!.from!}
           onBook={() => {
             window.open(`https://wa.me/${waNumber}?text=${waMessage}`, "_blank");
           }}
