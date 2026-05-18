@@ -18,7 +18,6 @@ import { motion, AnimatePresence } from "framer-motion";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type Role = "user" | "assistant";
-type CallStatus = "idle" | "connecting" | "active" | "ended";
 
 interface Message {
   id: string;
@@ -41,17 +40,6 @@ interface ApiResponse {
   action?: ChatAction;
   whatsappUrl?: string;
   error?: string;
-}
-
-// Minimal Vapi web SDK surface we need
-interface VapiInstance {
-  start: (assistantId: string) => Promise<unknown>;
-  stop: () => void;
-  setMuted: (m: boolean) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  on: (event: string, cb: (...a: any[]) => void) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  off: (event: string, cb: (...a: any[]) => void) => void;
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -224,9 +212,6 @@ const WA_HREF = "https://wa.me/923190514569?text=Hi%2C%20I%27d%20like%20to%20enq
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"chat" | "call">("chat");
-  const [callStatus, setCallStatus] = useState<CallStatus>("idle");
-  const [isMuted, setIsMuted] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [messages, setMessages] = useState<Message[]>([GREETING]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -236,12 +221,6 @@ export function ChatWidget() {
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const vapiRef = useRef<VapiInstance | null>(null);
-
-  // ── Vapi env vars (NEXT_PUBLIC_* safe on client) ───────────────────────────
-  const vapiKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY;
-  const vapiAsst = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID;
-  const vapiEnabled = !!(vapiKey && vapiAsst);
 
   // ── Load from sessionStorage on mount ──────────────────────────────────────
   useEffect(() => {
@@ -394,44 +373,6 @@ export function ChatWidget() {
     sessionStorage.removeItem(STORAGE_KEY);
   }
 
-  // ── Vapi voice call ────────────────────────────────────────────────────────
-  async function startVoiceCall() {
-    if (!vapiKey || !vapiAsst) return;
-    try {
-      if (!vapiRef.current) {
-        const { default: Vapi } = await import("@vapi-ai/web");
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        vapiRef.current = new (Vapi as any)(vapiKey) as VapiInstance;
-        vapiRef.current.on("call-start", () => setCallStatus("active"));
-        vapiRef.current.on("call-end", () => { setCallStatus("ended"); setIsSpeaking(false); });
-        vapiRef.current.on("speech-start", () => setIsSpeaking(true));
-        vapiRef.current.on("speech-end", () => setIsSpeaking(false));
-        vapiRef.current.on("error", () => setCallStatus("idle"));
-      }
-      setCallStatus("connecting");
-      await vapiRef.current.start(vapiAsst);
-    } catch {
-      setCallStatus("idle");
-    }
-  }
-
-  function endVoiceCall() {
-    vapiRef.current?.stop();
-    setCallStatus("idle");
-    setIsMuted(false);
-    setIsSpeaking(false);
-  }
-
-  function toggleMute() {
-    const next = !isMuted;
-    setIsMuted(next);
-    vapiRef.current?.setMuted(next);
-  }
-
-  // Cleanup Vapi on unmount
-  useEffect(() => {
-    return () => { vapiRef.current?.stop(); };
-  }, []);
 
   // ─── Render ──────────────────────────────────────────────────────────────────
 
@@ -614,235 +555,77 @@ export function ChatWidget() {
               </>
             )}
 
-            {/* ── Call / Voice mode ───────────────────────────────────────────── */}
+            {/* ── Call / Contact mode ─────────────────────────────────────────── */}
             {mode === "call" && (
-              <div className="flex flex-1 flex-col overflow-y-auto">
+              <div className="flex flex-1 flex-col gap-3 px-5 py-6">
+                {/* Avatar */}
+                <div className="mx-auto mb-2 flex flex-col items-center gap-2">
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full bg-brass/20" style={{ animation: "callRing 2.2s ease-out infinite" }} />
+                    <div className="absolute inset-0 rounded-full bg-brass/10" style={{ animation: "callRing 2.2s ease-out 0.5s infinite" }} />
+                    <div className="relative flex size-14 items-center justify-center rounded-full bg-gradient-to-br from-brass to-brass/60 text-[15px] font-bold text-[#1a1610]">
+                      SC
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-[14px] font-semibold text-ink">Swiss Cottages Six</div>
+                    <div className="text-[11px] text-ink-mute">Bhurban, Murree Hills · Est. 1998</div>
+                  </div>
+                </div>
 
-                {/* ── ACTIVE / CONNECTING call UI ─────────────────────────────── */}
-                <AnimatePresence mode="wait">
-                  {(callStatus === "active" || callStatus === "connecting") && (
-                    <motion.div
-                      key="active-call"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="flex flex-1 flex-col items-center justify-center gap-5 px-5 py-8"
-                    >
-                      {/* Animated orb */}
-                      <div className="relative flex items-center justify-center">
-                        {/* Outer rings */}
-                        {[0, 1, 2].map((i) => (
-                          <div
-                            key={i}
-                            className="absolute rounded-full border border-brass/20"
-                            style={{
-                              width: 80 + i * 28,
-                              height: 80 + i * 28,
-                              animation: isSpeaking
-                                ? `callRing ${1.2 + i * 0.3}s ease-out ${i * 0.15}s infinite`
-                                : "none",
-                              opacity: isSpeaking ? 1 : 0.35,
-                              transition: "opacity 0.4s",
-                            }}
-                          />
-                        ))}
-                        {/* Core orb */}
-                        <div
-                          className="relative flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-brass to-brass/70 text-[20px] font-bold text-[#1a1610] shadow-lg"
-                          style={{
-                            boxShadow: isSpeaking
-                              ? "0 0 0 6px rgba(184,153,104,0.25), 0 0 32px rgba(184,153,104,0.3)"
-                              : "0 4px 20px rgba(184,153,104,0.2)",
-                            transition: "box-shadow 0.3s",
-                          }}
-                        >
-                          {callStatus === "connecting" ? (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-8 animate-spin opacity-70">
-                              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                            </svg>
-                          ) : (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-8">
-                              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                              <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" />
-                            </svg>
-                          )}
-                        </div>
-                      </div>
+                {/* Direct call */}
+                <a
+                  href={PHONE_HREF}
+                  className="flex items-center gap-3 rounded-xl border border-line/60 bg-surface px-4 py-3.5 transition-all hover:border-brass/50 hover:text-brass active:scale-[0.98]"
+                >
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brass/10 text-brass">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-4">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.86-1.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-semibold text-ink">{PHONE_DISPLAY}</div>
+                    <div className="text-[11px] text-ink-mute">Call directly · 9am–10pm PKT</div>
+                  </div>
+                </a>
 
-                      {/* Status text */}
-                      <div className="text-center">
-                        <div className="text-[15px] font-semibold text-ink">
-                          {callStatus === "connecting" ? "Connecting…" : "Sasha · Voice Concierge"}
-                        </div>
-                        <div className="mt-1 flex items-center justify-center gap-1.5 text-[12px] text-ink-mute">
-                          {callStatus === "active" && (
-                            <>
-                              <span className="size-1.5 rounded-full bg-green-400" style={{ animation: "chatBounce 1.5s ease-in-out infinite" }} />
-                              {isSpeaking ? "Sasha is speaking…" : "Listening — speak now"}
-                            </>
-                          )}
-                          {callStatus === "connecting" && "Starting AI voice call"}
-                        </div>
-                      </div>
+                {/* WhatsApp */}
+                <a
+                  href={WA_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-[#25D366]/30 bg-[#25D366]/8 px-4 py-3.5 transition-all hover:bg-[#25D366]/15 active:scale-[0.98]"
+                >
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]">
+                    <WhatsAppIcon />
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-semibold text-[#25D366]">{PHONE_DISPLAY}</div>
+                    <div className="text-[11px] text-[#25D366]/70">WhatsApp · Reply within 2 hrs</div>
+                  </div>
+                </a>
 
-                      {/* Live waveform bars (decorative, animate when speaking) */}
-                      {callStatus === "active" && (
-                        <div className="flex items-center gap-[3px]">
-                          {[0.6, 1, 0.7, 1.3, 0.5, 1.1, 0.8, 1.4, 0.6, 1, 0.7].map((h, i) => (
-                            <div
-                              key={i}
-                              className="w-[3px] rounded-full bg-brass/70"
-                              style={{
-                                height: isSpeaking ? `${h * 18}px` : "4px",
-                                animation: isSpeaking
-                                  ? `chatBounce ${0.6 + i * 0.07}s ease-in-out ${i * 0.05}s infinite`
-                                  : "none",
-                                transition: "height 0.25s ease",
-                              }}
-                            />
-                          ))}
-                        </div>
-                      )}
+                {/* Divider */}
+                <div className="flex items-center gap-3 text-[11px] text-ink-dim">
+                  <div className="flex-1 border-t border-line/40" />
+                  or chat with Sasha
+                  <div className="flex-1 border-t border-line/40" />
+                </div>
 
-                      {/* Controls */}
-                      {callStatus === "active" && (
-                        <div className="flex gap-4">
-                          <button
-                            onClick={toggleMute}
-                            className={`flex flex-col items-center gap-1.5 rounded-2xl px-5 py-3 text-[11px] font-medium transition-all ${
-                              isMuted
-                                ? "bg-red-500/15 text-red-400 border border-red-500/30"
-                                : "bg-surface border border-line/60 text-ink-mute hover:border-brass/40 hover:text-ink"
-                            }`}
-                          >
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-5">
-                              {isMuted ? (
-                                <>
-                                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                                  <path d="M1 1l22 22M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
-                                </>
-                              ) : (
-                                <>
-                                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                                </>
-                              )}
-                            </svg>
-                            {isMuted ? "Unmute" : "Mute"}
-                          </button>
-                          <button
-                            onClick={endVoiceCall}
-                            className="flex flex-col items-center gap-1.5 rounded-2xl border border-red-500/30 bg-red-500/10 px-5 py-3 text-[11px] font-medium text-red-400 transition-all hover:bg-red-500/20"
-                          >
-                            <svg viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                              <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
-                            </svg>
-                            End Call
-                          </button>
-                        </div>
-                      )}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Back to chat */}
+                <button
+                  onClick={() => setMode("chat")}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-line/50 bg-surface/60 px-4 py-3 text-[12px] font-medium text-ink-mute transition-all hover:border-brass/30 hover:text-brass"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-3.5">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  Chat with Sasha — instant AI answers
+                </button>
 
-                {/* ── IDLE / ENDED state ──────────────────────────────────────── */}
-                <AnimatePresence mode="wait">
-                  {(callStatus === "idle" || callStatus === "ended") && (
-                    <motion.div
-                      key="idle-call"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex flex-1 flex-col px-5 py-5 gap-3"
-                    >
-                      {callStatus === "ended" && (
-                        <div className="mb-1 rounded-lg border border-line/50 bg-surface/60 px-4 py-2.5 text-center text-[12px] text-ink-mute">
-                          Call ended — thanks for speaking with Sasha 👋
-                        </div>
-                      )}
-
-                      {/* AI Voice Call — primary if Vapi configured */}
-                      {vapiEnabled && (
-                        <button
-                          onClick={startVoiceCall}
-                          className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-brass/40 bg-gradient-to-r from-brass/15 to-brass/5 px-5 py-4 text-left transition-all hover:border-brass/70 hover:from-brass/22 active:scale-[0.98]"
-                        >
-                          {/* Subtle shimmer */}
-                          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-brass/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                          <div className="relative flex size-12 shrink-0 items-center justify-center rounded-full bg-brass/20 text-brass">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="size-6">
-                              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                              <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" />
-                            </svg>
-                          </div>
-                          <div className="relative">
-                            <div className="text-[14px] font-semibold text-ink">AI Voice Call</div>
-                            <div className="mt-0.5 text-[11px] text-ink-mute">Talk to Sasha — answers in seconds, 24/7</div>
-                          </div>
-                          <div className="relative ml-auto">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-brass/15 px-2.5 py-1 font-mono text-[10px] font-medium text-brass">
-                              <span className="size-1.5 animate-pulse rounded-full bg-brass" />
-                              LIVE
-                            </span>
-                          </div>
-                        </button>
-                      )}
-
-                      {/* Divider */}
-                      <div className="flex items-center gap-3 text-[11px] text-ink-dim">
-                        <div className="flex-1 border-t border-line/40" />
-                        or speak to our team
-                        <div className="flex-1 border-t border-line/40" />
-                      </div>
-
-                      {/* Direct call */}
-                      <a
-                        href={PHONE_HREF}
-                        className="flex items-center gap-3 rounded-xl border border-line/60 bg-surface px-4 py-3.5 text-[13px] font-medium text-ink transition-all hover:border-brass/40 hover:text-brass active:scale-[0.98]"
-                      >
-                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brass/10 text-brass">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-4">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.86-1.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <div className="text-[13px] font-semibold">{PHONE_DISPLAY}</div>
-                          <div className="text-[11px] text-ink-mute">Direct line · 9am–10pm PKT</div>
-                        </div>
-                      </a>
-
-                      {/* WhatsApp */}
-                      <a
-                        href={WA_HREF}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 rounded-xl border border-[#25D366]/25 bg-[#25D366]/8 px-4 py-3.5 text-[13px] font-medium text-[#25D366] transition-all hover:bg-[#25D366]/15 active:scale-[0.98]"
-                      >
-                        <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]">
-                          <WhatsAppIcon />
-                        </div>
-                        <div>
-                          <div className="text-[13px] font-semibold">{PHONE_DISPLAY}</div>
-                          <div className="text-[11px] text-[#25D366]/70">WhatsApp · Reply within 2 hrs</div>
-                        </div>
-                      </a>
-
-                      {/* Chat CTA */}
-                      <button
-                        onClick={() => setMode("chat")}
-                        className="mt-1 flex items-center justify-center gap-2 rounded-xl border border-line/50 bg-surface/60 px-4 py-3 text-[12px] font-medium text-ink-mute transition-all hover:border-brass/30 hover:text-brass"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-3.5">
-                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                        </svg>
-                        Chat with Sasha instead
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
+                <div className="text-center text-[10px] text-ink-dim">
+                  Outside hours? WhatsApp gets a reply within 2 hrs.
+                </div>
               </div>
             )}
           </motion.div>
