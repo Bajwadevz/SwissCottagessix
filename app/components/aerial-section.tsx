@@ -49,10 +49,9 @@ export function AerialSection() {
           quality={100}
           className="object-cover"
           style={{
-            objectPosition: "center 28%",
-            // Sharpen upscaled photo: crisp edges, punchy contrast, vivid greens
-            filter: "contrast(1.12) brightness(1.04) saturate(1.18)",
-            imageRendering: "crisp-edges",
+            objectPosition: "center 45%",
+            // Enhance the aerial: punchy contrast, vivid red rooftops + green hillside
+            filter: "contrast(1.08) brightness(1.06) saturate(1.15)",
           }}
         />
       </motion.div>
